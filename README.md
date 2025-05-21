@@ -1,13 +1,13 @@
 # DFMCRM
 
-Customer Relationship Management system for dental practice management, highlighting advanced technologies including Yomi robotic dental implant procedures.
+Property management CRM tailored for Donald Mammano's portfolio in Scranton, Pennsylvania. The system focuses on minimal daily input with a map-based view, tenant tracking, maintenance logging, and automated reminders.
 
 ## Features
-- Patient management
-- Appointment scheduling
-- Treatment planning
-- Billing and insurance
-- Yomi robotic technology integration
+- Property and unit management
+- Tenant onboarding with lease tracking
+- Maintenance issue logging with urgency flags
+- Financial summary per property and portfolio
+- Simple REST API (FastAPI) for future integrations
 
 ## Development
-This repository contains the source code for the DFMCRM application.
+The `backend` directory contains the FastAPI application. Install dependencies with `pip install -r requirements.txt` and run using `uvicorn backend.main:app --reload`.
