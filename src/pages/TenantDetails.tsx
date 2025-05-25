@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import { ElementType } from 'react';
 import {
   Box,
   Typography,
@@ -31,8 +30,14 @@ import {
   Select,
 } from '@mui/material';
 
+import { GridProps as MuiGridProps } from '@mui/material/Grid'; // Import GridProps
+
 // Create a Grid component that accepts the item prop
-const Grid = (props: any) => <MuiGrid {...props} />;
+interface GridProps extends MuiGridProps {
+  item?: boolean; // Explicitly define item prop
+}
+const Grid: React.FC<GridProps> = (props) => <MuiGrid {...props} />;
+
 import EditIcon from '@mui/icons-material/Edit';
 import PersonIcon from '@mui/icons-material/Person';
 import HomeIcon from '@mui/icons-material/Home';
