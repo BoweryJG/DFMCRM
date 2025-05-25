@@ -3,7 +3,6 @@ import { useNavigate } from 'react-router-dom';
 import {
   Box,
   Typography,
-  Grid,
   Card,
   CardContent,
   CardMedia,
@@ -16,9 +15,9 @@ import {
   Select,
   MenuItem,
 } from '@mui/material';
+import Grid from '@mui/material/Unstable_Grid2';
 import SearchIcon from '@mui/icons-material/Search';
 import AddIcon from '@mui/icons-material/Add';
-import FilterListIcon from '@mui/icons-material/FilterList';
 import LocationOnIcon from '@mui/icons-material/LocationOn';
 import ApartmentIcon from '@mui/icons-material/Apartment';
 import HomeIcon from '@mui/icons-material/Home';
@@ -190,7 +189,7 @@ const Properties: React.FC = () => {
 
       <Grid container spacing={3}>
         {filteredProperties.map((property) => (
-          <Grid item xs={12} sm={6} md={4} key={property.id}>
+          <Grid xs={12} sm={6} md={4} key={property.id}>
             <Card
               sx={{
                 display: 'flex',

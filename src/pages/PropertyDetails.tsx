@@ -1,9 +1,8 @@
 import React, { useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import {
   Box,
   Typography,
-  Grid,
   Paper,
   Tabs,
   Tab,
@@ -18,13 +17,12 @@ import {
   Card,
   CardContent,
   CardHeader,
-  IconButton,
 } from '@mui/material';
+import Grid from '@mui/material/Unstable_Grid2';
 import EditIcon from '@mui/icons-material/Edit';
 import PersonIcon from '@mui/icons-material/Person';
 import BuildIcon from '@mui/icons-material/Build';
 import AttachMoneyIcon from '@mui/icons-material/AttachMoney';
-import EventIcon from '@mui/icons-material/Event';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, BarChart, Bar } from 'recharts';
 
 // Mock data for property details
@@ -241,8 +239,9 @@ function TabPanel(props: TabPanelProps) {
 
 const PropertyDetails: React.FC = () => {
   const { id } = useParams<{ id: string }>();
+  const navigate = useNavigate();
   const [tabValue, setTabValue] = useState(0);
-  const property = propertyData[Number(id) as keyof typeof propertyData];
+  const property = propertyData[Number(id) as keyof typeof propertyData] as any;
 
   if (!property) {
     return (
@@ -252,7 +251,7 @@ const PropertyDetails: React.FC = () => {
     );
   }
 
-  const handleTabChange = (event: React.SyntheticEvent, newValue: number) => {
+  const handleTabChange = (_: React.SyntheticEvent, newValue: number) => {
     setTabValue(newValue);
   };
 
@@ -273,50 +272,50 @@ const PropertyDetails: React.FC = () => {
 
       <Box sx={{ mb: 4 }}>
         <Grid container spacing={3}>
-          <Grid item xs={12} md={6}>
+          <Grid xs={12} md={6}>
             <img 
               src={property.image} 
               alt={property.address} 
               style={{ width: '100%', borderRadius: '8px', maxHeight: '300px', objectFit: 'cover' }}
             />
           </Grid>
-          <Grid item xs={12} md={6}>
+          <Grid xs={12} md={6}>
             <Paper sx={{ p: 3, height: '100%' }}>
               <Typography variant="h6" gutterBottom>Property Details</Typography>
               <Grid container spacing={2}>
-                <Grid item xs={6}>
+                <Grid xs={6}>
                   <Typography variant="body2" color="text.secondary">Address</Typography>
                   <Typography variant="body1">{property.address}</Typography>
                 </Grid>
-                <Grid item xs={6}>
+                <Grid xs={6}>
                   <Typography variant="body2" color="text.secondary">City, State, Zip</Typography>
                   <Typography variant="body1">{property.city}, {property.state} {property.zipCode}</Typography>
                 </Grid>
-                <Grid item xs={6}>
+                <Grid xs={6}>
                   <Typography variant="body2" color="text.secondary">Property Type</Typography>
                   <Typography variant="body1">{property.type}</Typography>
                 </Grid>
-                <Grid item xs={6}>
+                <Grid xs={6}>
                   <Typography variant="body2" color="text.secondary">Units</Typography>
                   <Typography variant="body1">{property.units}</Typography>
                 </Grid>
-                <Grid item xs={6}>
+                <Grid xs={6}>
                   <Typography variant="body2" color="text.secondary">Square Feet</Typography>
                   <Typography variant="body1">{property.squareFeet.toLocaleString()}</Typography>
                 </Grid>
-                <Grid item xs={6}>
+                <Grid xs={6}>
                   <Typography variant="body2" color="text.secondary">Parking Spaces</Typography>
                   <Typography variant="body1">{property.parkingSpaces}</Typography>
                 </Grid>
-                <Grid item xs={6}>
+                <Grid xs={6}>
                   <Typography variant="body2" color="text.secondary">Construction Year</Typography>
                   <Typography variant="body1">{property.constructionYear}</Typography>
                 </Grid>
-                <Grid item xs={6}>
+                <Grid xs={6}>
                   <Typography variant="body2" color="text.secondary">Last Renovation</Typography>
                   <Typography variant="body1">{property.lastRenovation}</Typography>
                 </Grid>
-                <Grid item xs={12}>
+                <Grid xs={12}>
                   <Typography variant="body2" color="text.secondary">Amenities</Typography>
                   <Box sx={{ mt: 1 }}>
                     {property.amenities.map((amenity, index) => (
@@ -346,7 +345,7 @@ const PropertyDetails: React.FC = () => {
         </Box>
         <TabPanel value={tabValue} index={0}>
           <Grid container spacing={3}>
-            <Grid item xs={12} md={6}>
+            <Grid xs={12} md={6}>
               <Paper sx={{ p: 2, height: '100%' }}>
                 <Typography variant="h6" gutterBottom>Occupancy Rate (%)</Typography>
                 <ResponsiveContainer width="100%" height={250}>
@@ -361,7 +360,7 @@ const PropertyDetails: React.FC = () => {
                 </ResponsiveContainer>
               </Paper>
             </Grid>
-            <Grid item xs={12} md={6}>
+            <Grid xs={12} md={6}>
               <Paper sx={{ p: 2, height: '100%' }}>
                 <Typography variant="h6" gutterBottom>Monthly Revenue ($)</Typography>
                 <ResponsiveContainer width="100%" height={250}>
@@ -376,7 +375,7 @@ const PropertyDetails: React.FC = () => {
                 </ResponsiveContainer>
               </Paper>
             </Grid>
-            <Grid item xs={12}>
+            <Grid xs={12}>
               <Paper sx={{ p: 3 }}>
                 <Typography variant="h6" gutterBottom>Property Description</Typography>
                 <Typography variant="body1">{property.description}</Typography>
@@ -477,7 +476,7 @@ const PropertyDetails: React.FC = () => {
         </TabPanel>
         <TabPanel value={tabValue} index={3}>
           <Grid container spacing={3}>
-            <Grid item xs={12} md={6}>
+            <Grid xs={12} md={6}>
               <Card>
                 <CardHeader title="Monthly Financial Summary" />
                 <CardContent>
@@ -522,7 +521,7 @@ const PropertyDetails: React.FC = () => {
                 </CardContent>
               </Card>
             </Grid>
-            <Grid item xs={12} md={6}>
+            <Grid xs={12} md={6}>
               <Card>
                 <CardHeader title="Property Value & Mortgage" />
                 <CardContent>
@@ -567,7 +566,7 @@ const PropertyDetails: React.FC = () => {
                 </CardContent>
               </Card>
             </Grid>
-            <Grid item xs={12}>
+            <Grid xs={12}>
               <Card>
                 <CardHeader 
                   title="Investment Performance" 

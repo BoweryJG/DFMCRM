@@ -1,5 +1,6 @@
 import React from 'react';
-import { Box, Typography, Grid, Paper, Card, CardContent } from '@mui/material';
+import { Box, Typography, Paper, Card } from '@mui/material';
+import Grid from '@mui/material/Unstable_Grid2';
 import ApartmentIcon from '@mui/icons-material/Apartment';
 import PeopleIcon from '@mui/icons-material/People';
 import AttachMoneyIcon from '@mui/icons-material/AttachMoney';
@@ -40,7 +41,7 @@ const Dashboard: React.FC = () => {
 
       <Grid container spacing={3} sx={{ mb: 4 }}>
         {summaryData.map((item, index) => (
-          <Grid item xs={12} sm={6} md={3} key={index}>
+          <Grid xs={12} sm={6} md={3} key={index}>
             <Card sx={{ display: 'flex', alignItems: 'center', p: 2, backgroundColor: item.color, color: 'white' }}>
               <Box sx={{ mr: 2 }}>{item.icon}</Box>
               <Box>
@@ -53,7 +54,7 @@ const Dashboard: React.FC = () => {
       </Grid>
 
       <Grid container spacing={3}>
-        <Grid item xs={12} md={6}>
+        <Grid xs={12} md={6}>
           <Paper sx={{ p: 2, height: 300 }}>
             <Typography variant="h6" gutterBottom>Occupancy Rate (%)</Typography>
             <ResponsiveContainer width="100%" height="100%">
@@ -68,7 +69,7 @@ const Dashboard: React.FC = () => {
             </ResponsiveContainer>
           </Paper>
         </Grid>
-        <Grid item xs={12} md={6}>
+        <Grid xs={12} md={6}>
           <Paper sx={{ p: 2, height: 300 }}>
             <Typography variant="h6" gutterBottom>Monthly Revenue ($)</Typography>
             <ResponsiveContainer width="100%" height="100%">
