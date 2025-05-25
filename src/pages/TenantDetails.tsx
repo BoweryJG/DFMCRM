@@ -3,7 +3,7 @@ import { useParams, useNavigate } from 'react-router-dom';
 import {
   Box,
   Typography,
-  Grid as MuiGrid,
+  Grid,
   Paper,
   Tabs,
   Tab,
@@ -28,15 +28,8 @@ import {
   FormControl,
   InputLabel,
   Select,
+  Stack,
 } from '@mui/material';
-
-import { GridProps as MuiGridProps } from '@mui/material/Grid'; // Import GridProps
-
-// Create a Grid component that accepts the item prop
-interface GridProps extends MuiGridProps {
-  item?: boolean; // Explicitly define item prop
-}
-const Grid: React.FC<GridProps> = (props) => <MuiGrid {...props} />;
 
 import EditIcon from '@mui/icons-material/Edit';
 import PersonIcon from '@mui/icons-material/Person';
@@ -324,8 +317,8 @@ const TenantDetails: React.FC = () => {
       </Box>
 
       <Box sx={{ mb: 4 }}>
-        <Grid container spacing={3}>
-          <Grid item xs={12} md={4}>
+        <Stack direction="row" spacing={3} sx={{ flexWrap: 'wrap' }}>
+          <Box sx={{ width: { xs: '100%', md: '32%' } }}>
             <Card>
               <CardHeader 
                 avatar={
@@ -370,8 +363,8 @@ const TenantDetails: React.FC = () => {
                 )}
               </CardContent>
             </Card>
-          </Grid>
-          <Grid item xs={12} md={4}>
+          </Box>
+          <Box sx={{ width: { xs: '100%', md: '32%' } }}>
             <Card>
               <CardHeader 
                 avatar={
@@ -404,8 +397,8 @@ const TenantDetails: React.FC = () => {
                 </Box>
               </CardContent>
             </Card>
-          </Grid>
-          <Grid item xs={12} md={4}>
+          </Box>
+          <Box sx={{ width: { xs: '100%', md: '32%' } }}>
             <Card>
               <CardHeader 
                 avatar={
@@ -454,8 +447,8 @@ const TenantDetails: React.FC = () => {
                 )}
               </CardContent>
             </Card>
-          </Grid>
-        </Grid>
+          </Box>
+        </Stack>
       </Box>
 
       <Box sx={{ width: '100%' }}>
@@ -468,8 +461,8 @@ const TenantDetails: React.FC = () => {
           </Tabs>
         </Box>
         <TabPanel value={tabValue} index={0}>
-          <Grid container spacing={3}>
-            <Grid item xs={12} md={6}>
+          <Stack direction="row" spacing={3} sx={{ flexWrap: 'wrap' }}>
+            <Box sx={{ width: { xs: '100%', md: '48%' } }}>
               <Paper sx={{ p: 3 }}>
                 <Typography variant="h6" gutterBottom>Tenant Information</Typography>
                 {isCommercialTenant(tenant) ? (
@@ -507,8 +500,8 @@ const TenantDetails: React.FC = () => {
                   </>
                 )}
               </Paper>
-            </Grid>
-            <Grid item xs={12} md={6}>
+            </Box>
+            <Box sx={{ width: { xs: '100%', md: '48%' } }}>
               <Paper sx={{ p: 3 }}>
                 <Typography variant="h6" gutterBottom>Property Information</Typography>
                 <Typography variant="body1" gutterBottom>
@@ -527,16 +520,16 @@ const TenantDetails: React.FC = () => {
                   View Property Details
                 </Button>
               </Paper>
-            </Grid>
+            </Box>
             {tenant.notes && (
-              <Grid item xs={12}>
+              <Box sx={{ width: '100%', mt: 3 }}>
                 <Paper sx={{ p: 3 }}>
                   <Typography variant="h6" gutterBottom>Notes</Typography>
                   <Typography variant="body1">{tenant.notes}</Typography>
                 </Paper>
-              </Grid>
+              </Box>
             )}
-          </Grid>
+          </Stack>
         </TabPanel>
         <TabPanel value={tabValue} index={1}>
           <Box sx={{ mb: 3, display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
@@ -550,8 +543,8 @@ const TenantDetails: React.FC = () => {
               Record Payment
             </Button>
           </Box>
-          <Grid container spacing={3}>
-            <Grid item xs={12} md={8}>
+          <Stack direction="row" spacing={3} sx={{ flexWrap: 'wrap' }}>
+            <Box sx={{ width: { xs: '100%', md: '66%' } }}>
               <Paper sx={{ p: 2, height: 300 }}>
                 <ResponsiveContainer width="100%" height="100%">
                   <LineChart data={paymentChartData} margin={{ top: 5, right: 20, bottom: 5, left: 0 }}>
@@ -564,8 +557,8 @@ const TenantDetails: React.FC = () => {
                   </LineChart>
                 </ResponsiveContainer>
               </Paper>
-            </Grid>
-            <Grid item xs={12} md={4}>
+            </Box>
+            <Box sx={{ width: { xs: '100%', md: '30%' } }}>
               <Paper sx={{ p: 2 }}>
                 <Typography variant="subtitle1" gutterBottom>Payment Summary</Typography>
                 <Typography variant="body2" gutterBottom>
@@ -581,8 +574,8 @@ const TenantDetails: React.FC = () => {
                   <strong>Payment Status:</strong> {tenant.paymentHistory[tenant.paymentHistory.length - 1].status}
                 </Typography>
               </Paper>
-            </Grid>
-            <Grid item xs={12}>
+            </Box>
+            <Box sx={{ width: '100%', mt: 3 }}>
               <Paper>
                 <List>
                   {tenant.paymentHistory.map((payment, index) => (
@@ -616,8 +609,8 @@ const TenantDetails: React.FC = () => {
                   ))}
                 </List>
               </Paper>
-            </Grid>
-          </Grid>
+            </Box>
+          </Stack>
         </TabPanel>
         <TabPanel value={tabValue} index={2}>
           <Box sx={{ mb: 3, display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
@@ -732,16 +725,16 @@ const TenantDetails: React.FC = () => {
       <Dialog open={openPaymentDialog} onClose={handlePaymentDialogClose} maxWidth="sm" fullWidth>
         <DialogTitle>Record Payment</DialogTitle>
         <DialogContent>
-          <Grid container spacing={2} sx={{ mt: 1 }}>
-            <Grid item xs={12}>
+          <Stack spacing={2} sx={{ mt: 1 }}>
+            <Box>
               <TextField
                 label="Amount"
                 type="number"
                 defaultValue={tenant.rent}
                 fullWidth
               />
-            </Grid>
-            <Grid item xs={12}>
+            </Box>
+            <Box>
               <TextField
                 label="Payment Date"
                 type="date"
@@ -751,8 +744,8 @@ const TenantDetails: React.FC = () => {
                   shrink: true,
                 }}
               />
-            </Grid>
-            <Grid item xs={12}>
+            </Box>
+            <Box>
               <FormControl fullWidth>
                 <InputLabel id="payment-status-label">Payment Status</InputLabel>
                 <Select
@@ -766,8 +759,8 @@ const TenantDetails: React.FC = () => {
                   <MenuItem value="Pending">Pending</MenuItem>
                 </Select>
               </FormControl>
-            </Grid>
-          </Grid>
+            </Box>
+          </Stack>
         </DialogContent>
         <DialogActions>
           <Button onClick={handlePaymentDialogClose}>Cancel</Button>
@@ -781,8 +774,8 @@ const TenantDetails: React.FC = () => {
       <Dialog open={openMaintenanceDialog} onClose={handleMaintenanceDialogClose} maxWidth="sm" fullWidth>
         <DialogTitle>New Maintenance Request</DialogTitle>
         <DialogContent>
-          <Grid container spacing={2} sx={{ mt: 1 }}>
-            <Grid item xs={12}>
+          <Stack spacing={2} sx={{ mt: 1 }}>
+            <Box>
               <TextField
                 label="Description"
                 multiline
@@ -790,8 +783,8 @@ const TenantDetails: React.FC = () => {
                 fullWidth
                 placeholder="Describe the maintenance issue..."
               />
-            </Grid>
-            <Grid item xs={12}>
+            </Box>
+            <Box>
               <FormControl fullWidth>
                 <InputLabel id="priority-label">Priority</InputLabel>
                 <Select
@@ -806,8 +799,8 @@ const TenantDetails: React.FC = () => {
                   <MenuItem value="Emergency">Emergency</MenuItem>
                 </Select>
               </FormControl>
-            </Grid>
-          </Grid>
+            </Box>
+          </Stack>
         </DialogContent>
         <DialogActions>
           <Button onClick={handleMaintenanceDialogClose}>Cancel</Button>
