@@ -3,7 +3,6 @@ import { useParams, useNavigate } from 'react-router-dom';
 import {
   Box,
   Typography,
-  Grid,
   Paper,
   Tabs,
   Tab,
@@ -18,7 +17,6 @@ import {
   Card,
   CardContent,
   CardHeader,
-  IconButton,
   TextField,
   Dialog,
   DialogTitle,
@@ -32,7 +30,6 @@ import {
 } from '@mui/material';
 
 import EditIcon from '@mui/icons-material/Edit';
-import PersonIcon from '@mui/icons-material/Person';
 import HomeIcon from '@mui/icons-material/Home';
 import AttachMoneyIcon from '@mui/icons-material/AttachMoney';
 import EventIcon from '@mui/icons-material/Event';
@@ -274,7 +271,7 @@ const TenantDetails: React.FC = () => {
     );
   }
 
-  const handleTabChange = (event: React.SyntheticEvent, newValue: number) => {
+  const handleTabChange = (_event: React.SyntheticEvent, newValue: number) => {
     setTabValue(newValue);
   };
 
