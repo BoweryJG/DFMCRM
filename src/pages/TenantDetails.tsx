@@ -4,7 +4,7 @@ import { ElementType } from 'react';
 import {
   Box,
   Typography,
-  Grid,
+  Grid as MuiGrid,
   Paper,
   Tabs,
   Tab,
@@ -30,6 +30,9 @@ import {
   InputLabel,
   Select,
 } from '@mui/material';
+
+// Create a Grid component that accepts the item prop
+const Grid = (props: any) => <MuiGrid {...props} />;
 import EditIcon from '@mui/icons-material/Edit';
 import PersonIcon from '@mui/icons-material/Person';
 import HomeIcon from '@mui/icons-material/Home';
@@ -738,3 +741,78 @@ const TenantDetails: React.FC = () => {
                 label="Payment Date"
                 type="date"
                 defaultValue={new Date().toISOString().split('T')[0]}
+                fullWidth
+                InputLabelProps={{
+                  shrink: true,
+                }}
+              />
+            </Grid>
+            <Grid item xs={12}>
+              <FormControl fullWidth>
+                <InputLabel id="payment-status-label">Payment Status</InputLabel>
+                <Select
+                  labelId="payment-status-label"
+                  id="payment-status"
+                  defaultValue="Paid"
+                  label="Payment Status"
+                >
+                  <MenuItem value="Paid">Paid</MenuItem>
+                  <MenuItem value="Late">Late</MenuItem>
+                  <MenuItem value="Pending">Pending</MenuItem>
+                </Select>
+              </FormControl>
+            </Grid>
+          </Grid>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handlePaymentDialogClose}>Cancel</Button>
+          <Button onClick={handlePaymentDialogClose} variant="contained" color="primary">
+            Save Payment
+          </Button>
+        </DialogActions>
+      </Dialog>
+
+      {/* Maintenance Request Dialog */}
+      <Dialog open={openMaintenanceDialog} onClose={handleMaintenanceDialogClose} maxWidth="sm" fullWidth>
+        <DialogTitle>New Maintenance Request</DialogTitle>
+        <DialogContent>
+          <Grid container spacing={2} sx={{ mt: 1 }}>
+            <Grid item xs={12}>
+              <TextField
+                label="Description"
+                multiline
+                rows={4}
+                fullWidth
+                placeholder="Describe the maintenance issue..."
+              />
+            </Grid>
+            <Grid item xs={12}>
+              <FormControl fullWidth>
+                <InputLabel id="priority-label">Priority</InputLabel>
+                <Select
+                  labelId="priority-label"
+                  id="priority"
+                  defaultValue="Medium"
+                  label="Priority"
+                >
+                  <MenuItem value="Low">Low</MenuItem>
+                  <MenuItem value="Medium">Medium</MenuItem>
+                  <MenuItem value="High">High</MenuItem>
+                  <MenuItem value="Emergency">Emergency</MenuItem>
+                </Select>
+              </FormControl>
+            </Grid>
+          </Grid>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleMaintenanceDialogClose}>Cancel</Button>
+          <Button onClick={handleMaintenanceDialogClose} variant="contained" color="primary">
+            Submit Request
+          </Button>
+        </DialogActions>
+      </Dialog>
+    </Box>
+  );
+};
+
+export default TenantDetails;
