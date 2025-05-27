@@ -3,7 +3,6 @@ import { useNavigate } from 'react-router-dom';
 import {
   Box,
   Typography,
-  Grid,
   Card,
   CardContent,
   CardMedia,
@@ -17,11 +16,10 @@ import {
   MenuItem,
   LinearProgress,
   Tooltip,
-  IconButton,
 } from '@mui/material';
+import Grid from '@mui/material/Grid2';
 import SearchIcon from '@mui/icons-material/Search';
 import AddIcon from '@mui/icons-material/Add';
-import FilterListIcon from '@mui/icons-material/FilterList';
 import LocationOnIcon from '@mui/icons-material/LocationOn';
 import ApartmentIcon from '@mui/icons-material/Apartment';
 import HomeIcon from '@mui/icons-material/Home';
@@ -241,12 +239,6 @@ const Properties: React.FC = () => {
     }
   };
 
-  const getHealthColor = (health: number) => {
-    if (health >= 90) return '#4caf50';
-    if (health >= 80) return '#ff9800';
-    if (health >= 70) return '#f44336';
-    return '#9e9e9e';
-  };
 
   const getHealthIcon = (health: number) => {
     if (health >= 90) return <CheckCircleIcon sx={{ color: '#4caf50' }} />;
@@ -309,7 +301,7 @@ const Properties: React.FC = () => {
 
       <Grid container spacing={3}>
         {filteredProperties.map((property) => (
-          <Grid item xs={12} sm={6} md={4} key={property.id}>
+          <Grid size={{ xs: 12, sm: 6, md: 4 }} key={property.id}>
             <Card
               sx={{
                 display: 'flex',

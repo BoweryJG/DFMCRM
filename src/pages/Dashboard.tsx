@@ -1,16 +1,13 @@
 import React, { useState } from 'react';
-import { Box, Typography, Grid, Paper, Card, CardContent, IconButton, LinearProgress, Chip, Avatar } from '@mui/material';
+import { Box, Typography, Card, LinearProgress, Chip } from '@mui/material';
+import Grid from '@mui/material/Grid2';
 import ApartmentIcon from '@mui/icons-material/Apartment';
-import PeopleIcon from '@mui/icons-material/People';
-import AttachMoneyIcon from '@mui/icons-material/AttachMoney';
-import BuildIcon from '@mui/icons-material/Build';
 import TrendingUpIcon from '@mui/icons-material/TrendingUp';
 import WarningIcon from '@mui/icons-material/Warning';
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import LocationOnIcon from '@mui/icons-material/LocationOn';
 import SchoolIcon from '@mui/icons-material/School';
-import BusinessIcon from '@mui/icons-material/Business';
-import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, BarChart, Bar, PieChart, Pie, Cell } from 'recharts';
+import { XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, BarChart, Bar, PieChart, Pie, Cell } from 'recharts';
 import { useNavigate } from 'react-router-dom';
 
 const summaryData = [
@@ -111,7 +108,7 @@ const Dashboard: React.FC = () => {
       {/* Key Metrics - Visual and ADD-friendly */}
       <Grid container spacing={3} sx={{ mb: 4 }}>
         {summaryData.map((item, index) => (
-          <Grid item xs={12} sm={6} md={3} key={index}>
+          <Grid size={{ xs: 12, sm: 6, md: 3 }} key={index}>
             <Card 
               sx={{ 
                 p: 3, 
@@ -163,7 +160,7 @@ const Dashboard: React.FC = () => {
 
       {/* Quick Actions Panel - ADD-friendly */}
       <Grid container spacing={3} sx={{ mb: 4 }}>
-        <Grid item xs={12} md={4}>
+        <Grid size={{ xs: 12, md: 4 }}>
           <Card sx={{ p: 3, height: '100%', boxShadow: '0 4px 20px rgba(0,0,0,0.08)' }}>
             <Typography variant="h5" sx={{ fontWeight: 'bold', mb: 2, color: '#1e3a5f' }}>
               🎯 Quick Actions
@@ -202,14 +199,14 @@ const Dashboard: React.FC = () => {
         </Grid>
 
         {/* Property Performance Visual */}
-        <Grid item xs={12} md={8}>
+        <Grid size={{ xs: 12, md: 8 }}>
           <Card sx={{ p: 3, height: '100%', boxShadow: '0 4px 20px rgba(0,0,0,0.08)' }}>
             <Typography variant="h5" sx={{ fontWeight: 'bold', mb: 2, color: '#1e3a5f' }}>
               📊 Property Performance
             </Typography>
             <Grid container spacing={2}>
               {propertyPerformance.map((property) => (
-                <Grid item xs={12} sm={6} md={4} key={property.name}>
+                <Grid size={{ xs: 12, sm: 6, md: 4 }} key={property.name}>
                   <Box 
                     sx={{ 
                       p: 2, 
@@ -265,7 +262,7 @@ const Dashboard: React.FC = () => {
 
       {/* Revenue and Tenant Mix */}
       <Grid container spacing={3}>
-        <Grid item xs={12} md={8}>
+        <Grid size={{ xs: 12, md: 8 }}>
           <Card sx={{ p: 3, boxShadow: '0 4px 20px rgba(0,0,0,0.08)' }}>
             <Typography variant="h5" sx={{ fontWeight: 'bold', mb: 2, color: '#1e3a5f' }}>
               💰 Revenue Trend
@@ -282,7 +279,7 @@ const Dashboard: React.FC = () => {
             </ResponsiveContainer>
           </Card>
         </Grid>
-        <Grid item xs={12} md={4}>
+        <Grid size={{ xs: 12, md: 4 }}>
           <Card sx={{ p: 3, boxShadow: '0 4px 20px rgba(0,0,0,0.08)' }}>
             <Typography variant="h5" sx={{ fontWeight: 'bold', mb: 2, color: '#1e3a5f' }}>
               👥 Tenant Mix
