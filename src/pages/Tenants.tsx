@@ -21,8 +21,9 @@ import {
   InputLabel,
   Select,
   MenuItem,
+  Grid, // Added Grid here
 } from '@mui/material';
-import Grid from '@mui/material/Grid2';
+// Removed import Grid from '@mui/material/Grid2';
 import SearchIcon from '@mui/icons-material/Search';
 import AddIcon from '@mui/icons-material/Add';
 import PersonIcon from '@mui/icons-material/Person';
@@ -326,16 +327,16 @@ const Tenants: React.FC = () => {
         <DialogTitle>Add New Tenant</DialogTitle>
         <DialogContent>
           <Grid container spacing={2} sx={{ mt: 1 }}>
-            <Grid size={{ xs: 12, sm: 6 }}>
+            <Grid item xs={12} sm={6}> {/* Changed size prop to item and direct props */}
               <TextField label="Full Name" fullWidth />
             </Grid>
-            <Grid size={{ xs: 12, sm: 6 }}>
+            <Grid item xs={12} sm={6}> {/* Changed size prop to item and direct props */}
               <TextField label="Email" type="email" fullWidth />
             </Grid>
-            <Grid size={{ xs: 12, sm: 6 }}>
+            <Grid item xs={12} sm={6}> {/* Changed size prop to item and direct props */}
               <TextField label="Phone Number" fullWidth />
             </Grid>
-            <Grid size={{ xs: 12, sm: 6 }}>
+            <Grid item xs={12} sm={6}> {/* Changed size prop to item and direct props */}
               <FormControl fullWidth>
                 <InputLabel>Property</InputLabel>
                 <Select label="Property">
@@ -345,13 +346,13 @@ const Tenants: React.FC = () => {
                 </Select>
               </FormControl>
             </Grid>
-            <Grid size={{ xs: 12, sm: 6 }}>
+            <Grid item xs={12} sm={6}> {/* Changed size prop to item and direct props */}
               <TextField label="Unit Number" fullWidth />
             </Grid>
-            <Grid size={{ xs: 12, sm: 6 }}>
+            <Grid item xs={12} sm={6}> {/* Changed size prop to item and direct props */}
               <TextField label="Monthly Rent" type="number" fullWidth />
             </Grid>
-            <Grid size={{ xs: 12, sm: 6 }}>
+            <Grid item xs={12} sm={6}> {/* Changed size prop to item and direct props */}
               <TextField
                 label="Lease Start Date"
                 type="date"
@@ -361,7 +362,7 @@ const Tenants: React.FC = () => {
                 }}
               />
             </Grid>
-            <Grid size={{ xs: 12, sm: 6 }}>
+            <Grid item xs={12} sm={6}> {/* Changed size prop to item and direct props */}
               <TextField
                 label="Lease End Date"
                 type="date"
@@ -371,10 +372,10 @@ const Tenants: React.FC = () => {
                 }}
               />
             </Grid>
-            <Grid size={{ xs: 12, sm: 6 }}>
+            <Grid item xs={12} sm={6}> {/* Changed size prop to item and direct props */}
               <TextField label="Security Deposit" type="number" fullWidth />
             </Grid>
-            <Grid size={{ xs: 12, sm: 6 }}>
+            <Grid item xs={12} sm={6}> {/* Changed size prop to item and direct props */}
               <FormControl fullWidth>
                 <InputLabel>Tenant Type</InputLabel>
                 <Select label="Tenant Type">

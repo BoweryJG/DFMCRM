@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
-import { Box, Typography, Card, LinearProgress, Chip } from '@mui/material';
-import Grid from '@mui/material/Grid2';
+import { Box, Typography, Card, LinearProgress, Chip, Grid } from '@mui/material'; // Reverted import
 import ApartmentIcon from '@mui/icons-material/Apartment';
 import TrendingUpIcon from '@mui/icons-material/TrendingUp';
 import WarningIcon from '@mui/icons-material/Warning';
@@ -108,7 +107,7 @@ const Dashboard: React.FC = () => {
       {/* Key Metrics - Visual and ADD-friendly */}
       <Grid container spacing={3} sx={{ mb: 4 }}>
         {summaryData.map((item, index) => (
-          <Grid size={{ xs: 12, sm: 6, md: 3 }} key={index}>
+          <Grid item xs={12} sm={6} md={3} key={index}> {/* Restored item prop */}
             <Card 
               sx={{ 
                 p: 3, 
@@ -160,7 +159,7 @@ const Dashboard: React.FC = () => {
 
       {/* Quick Actions Panel - ADD-friendly */}
       <Grid container spacing={3} sx={{ mb: 4 }}>
-        <Grid size={{ xs: 12, md: 4 }}>
+        <Grid item xs={12} md={4}> {/* Restored item prop */}
           <Card sx={{ p: 3, height: '100%', boxShadow: '0 4px 20px rgba(0,0,0,0.08)' }}>
             <Typography variant="h5" sx={{ fontWeight: 'bold', mb: 2, color: '#1e3a5f' }}>
               🎯 Quick Actions
@@ -199,14 +198,14 @@ const Dashboard: React.FC = () => {
         </Grid>
 
         {/* Property Performance Visual */}
-        <Grid size={{ xs: 12, md: 8 }}>
+        <Grid item xs={12} md={8}> {/* Restored item prop */}
           <Card sx={{ p: 3, height: '100%', boxShadow: '0 4px 20px rgba(0,0,0,0.08)' }}>
             <Typography variant="h5" sx={{ fontWeight: 'bold', mb: 2, color: '#1e3a5f' }}>
               📊 Property Performance
             </Typography>
             <Grid container spacing={2}>
               {propertyPerformance.map((property) => (
-                <Grid size={{ xs: 12, sm: 6, md: 4 }} key={property.name}>
+                <Grid item xs={12} sm={6} md={4} key={property.name}> {/* Restored item prop */}
                   <Box 
                     sx={{ 
                       p: 2, 
@@ -262,7 +261,7 @@ const Dashboard: React.FC = () => {
 
       {/* Revenue and Tenant Mix */}
       <Grid container spacing={3}>
-        <Grid size={{ xs: 12, md: 8 }}>
+        <Grid item xs={12} md={8}> {/* Restored item prop */}
           <Card sx={{ p: 3, boxShadow: '0 4px 20px rgba(0,0,0,0.08)' }}>
             <Typography variant="h5" sx={{ fontWeight: 'bold', mb: 2, color: '#1e3a5f' }}>
               💰 Revenue Trend
@@ -279,7 +278,7 @@ const Dashboard: React.FC = () => {
             </ResponsiveContainer>
           </Card>
         </Grid>
-        <Grid size={{ xs: 12, md: 4 }}>
+        <Grid item xs={12} md={4}> {/* Restored item prop */}
           <Card sx={{ p: 3, boxShadow: '0 4px 20px rgba(0,0,0,0.08)' }}>
             <Typography variant="h5" sx={{ fontWeight: 'bold', mb: 2, color: '#1e3a5f' }}>
               👥 Tenant Mix

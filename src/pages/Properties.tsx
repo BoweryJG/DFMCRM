@@ -16,8 +16,9 @@ import {
   MenuItem,
   LinearProgress,
   Tooltip,
+  Grid, // Added Grid here
 } from '@mui/material';
-import Grid from '@mui/material/Grid2';
+// Removed import Grid from '@mui/material/Grid2';
 import SearchIcon from '@mui/icons-material/Search';
 import AddIcon from '@mui/icons-material/Add';
 import LocationOnIcon from '@mui/icons-material/LocationOn';
@@ -301,7 +302,7 @@ const Properties: React.FC = () => {
 
       <Grid container spacing={3}>
         {filteredProperties.map((property) => (
-          <Grid size={{ xs: 12, sm: 6, md: 4 }} key={property.id}>
+          <Grid item xs={12} sm={6} md={4} key={property.id}> {/* Changed size prop to item and direct props */}
             <Card
               sx={{
                 display: 'flex',

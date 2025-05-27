@@ -13,6 +13,10 @@ import Properties from './pages/Properties';
 import PropertyDetails from './pages/PropertyDetails';
 import Tenants from './pages/Tenants';
 import TenantDetails from './pages/TenantDetails';
+import Maintenance from './pages/Maintenance';
+import Financials from './pages/Financials';
+import Alerts from './pages/Alerts';
+import Reports from './pages/Reports';
 
 const App: React.FC = () => {
   const [sidebarOpen, setSidebarOpen] = useState(true);
@@ -49,6 +53,10 @@ const App: React.FC = () => {
               <Route path="/properties/:id" element={<PropertyDetails />} />
               <Route path="/tenants" element={<Tenants />} />
               <Route path="/tenants/:id" element={<TenantDetails />} />
+              <Route path="/maintenance" element={<Maintenance />} />
+              <Route path="/financials" element={<Financials />} />
+              <Route path="/alerts" element={<Alerts />} />
+              <Route path="/reports" element={<Reports />} />
             </Routes>
           </Box>
         </Box>
