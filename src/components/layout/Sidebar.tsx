@@ -17,6 +17,8 @@ import PeopleIcon from '@mui/icons-material/People';
 import BuildIcon from '@mui/icons-material/Build';
 import AssessmentIcon from '@mui/icons-material/Assessment';
 import SettingsIcon from '@mui/icons-material/Settings';
+import AttachMoneyIcon from '@mui/icons-material/AttachMoney';
+import NotificationsIcon from '@mui/icons-material/Notifications';
 import { NavLink } from 'react-router-dom';
 
 interface SidebarProps {
@@ -26,12 +28,13 @@ interface SidebarProps {
 const drawerWidth = 240;
 
 const navItems = [
-  { text: 'Dashboard', icon: <DashboardIcon />, path: '/' },
-  { text: 'Properties', icon: <ApartmentIcon />, path: '/properties' },
-  { text: 'Tenants', icon: <PeopleIcon />, path: '/tenants' },
-  { text: 'Maintenance', icon: <BuildIcon />, path: '/maintenance' },
-  { text: 'Reports', icon: <AssessmentIcon />, path: '/reports' },
-  { text: 'Settings', icon: <SettingsIcon />, path: '/settings' },
+  { text: 'Dashboard', icon: <DashboardIcon />, path: '/', emoji: '🏠' },
+  { text: 'Properties', icon: <ApartmentIcon />, path: '/properties', emoji: '🏘️' },
+  { text: 'Tenants', icon: <PeopleIcon />, path: '/tenants', emoji: '👥' },
+  { text: 'Financials', icon: <AttachMoneyIcon />, path: '/financials', emoji: '💰' },
+  { text: 'Maintenance', icon: <BuildIcon />, path: '/maintenance', emoji: '🔧' },
+  { text: 'Alerts', icon: <NotificationsIcon />, path: '/alerts', emoji: '🔔' },
+  { text: 'Reports', icon: <AssessmentIcon />, path: '/reports', emoji: '📊' },
 ];
 
 const Sidebar: React.FC<SidebarProps> = ({ open }) => {
@@ -51,9 +54,15 @@ const Sidebar: React.FC<SidebarProps> = ({ open }) => {
         },
       }}
     >
-      <Toolbar sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center', py: 2 }}>
-        <Typography variant="h5" noWrap component="div" sx={{ fontWeight: 'bold' }}>
-          DFM CRM
+      <Toolbar sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', py: 3 }}>
+        <Typography variant="h4" noWrap component="div" sx={{ fontWeight: 'bold', mb: 1 }}>
+          DFM
+        </Typography>
+        <Typography variant="body2" sx={{ opacity: 0.9 }}>
+          Properties
+        </Typography>
+        <Typography variant="caption" sx={{ opacity: 0.7, mt: 0.5 }}>
+          Est. 2003
         </Typography>
       </Toolbar>
       <Divider sx={{ borderColor: 'rgba(255, 255, 255, 0.2)' }} />
@@ -65,9 +74,11 @@ const Sidebar: React.FC<SidebarProps> = ({ open }) => {
               to={item.path}
               sx={{
                 '&.active': {
-                  backgroundColor: 'rgba(255, 255, 255, 0.1)',
+                  backgroundColor: 'rgba(255, 255, 255, 0.2)',
+                  borderLeft: '4px solid white',
                   '& .MuiListItemIcon-root, & .MuiListItemText-primary': {
-                    color: (theme) => theme.palette.secondary.light,
+                    color: 'white',
+                    fontWeight: 'bold',
                   },
                 },
                 '&:hover': {
@@ -78,9 +89,16 @@ const Sidebar: React.FC<SidebarProps> = ({ open }) => {
               }}
             >
               <ListItemIcon sx={{ color: 'inherit', minWidth: 40 }}>
-                {item.icon}
+                <Box sx={{ display: 'flex', alignItems: 'center' }}>
+                  <Typography sx={{ fontSize: '1.5rem', mr: 1 }}>{item.emoji}</Typography>
+                </Box>
               </ListItemIcon>
-              <ListItemText primary={item.text} />
+              <ListItemText 
+                primary={item.text} 
+                primaryTypographyProps={{ 
+                  sx: { fontWeight: 'medium', fontSize: '1rem' } 
+                }}
+              />
             </ListItemButton>
           </ListItem>
         ))}

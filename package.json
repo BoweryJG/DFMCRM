@@ -1,7 +1,7 @@
 {
   "name": "dfmcrm",
   "version": "1.0.0",
-  "description": "Customer Relationship Management system for dental practice management, highlighting advanced technologies including Yomi robotic dental implant procedures.",
+  "description": "Customer Relationship Management system for real estate portfolio management in Pennsylvania.",
   "main": "index.js",
   "scripts": {
     "dev": "vite",
