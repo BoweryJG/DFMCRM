@@ -130,7 +130,7 @@ export const LoginModal: React.FC<LoginModalProps> = ({ open, onClose }) => {
 
           <TextField
             fullWidth
-            label="Password (hint: golden)"
+            label="Password (hint: Jason's last name)"
             type={showPassword ? 'text' : 'password'}
             value={password}
             onChange={(e) => setPassword(e.target.value)}
