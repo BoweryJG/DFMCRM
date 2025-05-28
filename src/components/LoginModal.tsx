@@ -31,7 +31,7 @@ export const LoginModal: React.FC<LoginModalProps> = ({ open, onClose }) => {
   const theme = useTheme();
   const { signInWithEmail, signUp } = useAuth();
   const [isSignUp, setIsSignUp] = useState(false);
-  const [email, setEmail] = useState('');
+  const [email, setEmail] = useState('admin@dfmproperties.com');
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -75,8 +75,11 @@ export const LoginModal: React.FC<LoginModalProps> = ({ open, onClose }) => {
       fullWidth
       PaperProps={{
         sx: {
-          borderRadius: 3,
+          borderRadius: { xs: 0, sm: 3 },
           boxShadow: theme.shadows[24],
+          maxHeight: { xs: '100vh', sm: '90vh' },
+          m: { xs: 0, sm: 2 },
+          width: { xs: '100%', sm: 'auto' },
         },
       }}
     >
@@ -100,7 +103,7 @@ export const LoginModal: React.FC<LoginModalProps> = ({ open, onClose }) => {
             color: theme.palette.text.secondary,
             mt: 0.5
           }}>
-            {isSignUp ? 'Create your account' : 'Sign in to manage your properties'}
+            {isSignUp ? 'Create your account' : 'Enter your password to continue'}
           </Typography>
         </Box>
         <IconButton 
@@ -131,23 +134,25 @@ export const LoginModal: React.FC<LoginModalProps> = ({ open, onClose }) => {
 
         {/* Email Form */}
         <Box component="form" onSubmit={handleEmailAuth} sx={{ mt: 3 }}>
-          <TextField
-            fullWidth
-            label="Email"
-            type="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            disabled={loading}
-            required
-            sx={{ mb: 2 }}
-            InputProps={{
-              startAdornment: (
-                <InputAdornment position="start">
-                  <EmailIcon sx={{ color: theme.palette.text.secondary }} />
-                </InputAdornment>
-              ),
-            }}
-          />
+          {isSignUp && (
+            <TextField
+              fullWidth
+              label="Email"
+              type="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              disabled={loading}
+              required
+              sx={{ mb: 2 }}
+              InputProps={{
+                startAdornment: (
+                  <InputAdornment position="start">
+                    <EmailIcon sx={{ color: theme.palette.text.secondary }} />
+                  </InputAdornment>
+                ),
+              }}
+            />
+          )}
 
           <TextField
             fullWidth
@@ -158,6 +163,7 @@ export const LoginModal: React.FC<LoginModalProps> = ({ open, onClose }) => {
             disabled={loading}
             required
             sx={{ mb: 3 }}
+            autoFocus
             InputProps={{
               startAdornment: (
                 <InputAdornment position="start">

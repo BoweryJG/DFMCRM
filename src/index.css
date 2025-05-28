@@ -9,6 +9,14 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   background-color: #f5f5f5;
+  /* Prevent iOS text size adjustment */
+  -webkit-text-size-adjust: 100%;
+  /* Prevent tap highlight on mobile */
+  -webkit-tap-highlight-color: transparent;
+  /* Smooth momentum scrolling on iOS */
+  -webkit-overflow-scrolling: touch;
+  /* Prevent overscroll bounce on iOS */
+  overscroll-behavior: none;
 }
 
 a {
@@ -33,4 +41,32 @@ a {
 
 ::-webkit-scrollbar-thumb:hover {
   background: #808e95;
+}
+
+/* Mobile-specific optimizations */
+@media (max-width: 768px) {
+  /* Hide scrollbars on mobile for cleaner look */
+  ::-webkit-scrollbar {
+    display: none;
+  }
+  
+  /* Ensure touch targets are at least 44px */
+  button, 
+  input, 
+  select, 
+  textarea,
+  a {
+    min-height: 44px;
+    min-width: 44px;
+  }
+  
+  /* Prevent horizontal scroll */
+  html, body {
+    overflow-x: hidden;
+  }
+  
+  /* Improve form input usability on mobile */
+  input, textarea, select {
+    font-size: 16px; /* Prevents zoom on iOS */
+  }
 }

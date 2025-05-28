@@ -163,9 +163,9 @@ const LandingPage: React.FC<{ onLogin: () => void }> = ({ onLogin }) => {
         component="button"
         onClick={onLogin}
         sx={{
-          px: 4,
-          py: 2,
-          fontSize: '1.125rem',
+          px: { xs: 3, sm: 4 },
+          py: { xs: 1.5, sm: 2 },
+          fontSize: { xs: '1rem', sm: '1.125rem' },
           fontWeight: 600,
           color: 'white',
           backgroundColor: theme.palette.primary.main,
@@ -173,10 +173,15 @@ const LandingPage: React.FC<{ onLogin: () => void }> = ({ onLogin }) => {
           borderRadius: 2,
           cursor: 'pointer',
           transition: 'all 0.2s',
+          touchAction: 'manipulation',
+          WebkitTapHighlightColor: 'transparent',
           '&:hover': {
             backgroundColor: theme.palette.primary.dark,
             transform: 'translateY(-2px)',
             boxShadow: theme.shadows[8],
+          },
+          '&:active': {
+            transform: 'translateY(0)',
           },
         }}
       >
