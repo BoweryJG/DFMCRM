@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
+import { Routes, Route, Navigate } from 'react-router-dom';
 import { Box, CssBaseline, ThemeProvider } from '@mui/material';
 import theme from './theme';
 
@@ -28,39 +28,37 @@ const App: React.FC = () => {
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
-      <Router>
-        <Box sx={{ display: 'flex' }}>
-          <Header toggleSidebar={toggleSidebar} />
-          <Sidebar open={sidebarOpen} />
-          <Box
-            component="main"
-            sx={{
-              flexGrow: 1,
-              p: 3,
-              mt: 8,
-              ml: { sm: sidebarOpen ? 30 : 7 },
-              width: { sm: `calc(100% - ${sidebarOpen ? 240 : 56}px)` },
-              transition: theme.transitions.create(['margin', 'width'], {
-                easing: theme.transitions.easing.sharp,
-                duration: theme.transitions.duration.leavingScreen,
-              }),
-            }}
-          >
-            <Routes>
-              <Route path="/" element={<Navigate to="/dashboard" replace />} />
-              <Route path="/dashboard" element={<Dashboard />} />
-              <Route path="/properties" element={<Properties />} />
-              <Route path="/properties/:id" element={<PropertyDetails />} />
-              <Route path="/tenants" element={<Tenants />} />
-              <Route path="/tenants/:id" element={<TenantDetails />} />
-              <Route path="/maintenance" element={<Maintenance />} />
-              <Route path="/financials" element={<Financials />} />
-              <Route path="/alerts" element={<Alerts />} />
-              <Route path="/reports" element={<Reports />} />
-            </Routes>
-          </Box>
+      <Box sx={{ display: 'flex' }}>
+        <Header toggleSidebar={toggleSidebar} />
+        <Sidebar open={sidebarOpen} />
+        <Box
+          component="main"
+          sx={{
+            flexGrow: 1,
+            p: 3,
+            mt: 8,
+            ml: { sm: sidebarOpen ? 30 : 7 },
+            width: { sm: `calc(100% - ${sidebarOpen ? 240 : 56}px)` },
+            transition: theme.transitions.create(['margin', 'width'], {
+              easing: theme.transitions.easing.sharp,
+              duration: theme.transitions.duration.leavingScreen,
+            }),
+          }}
+        >
+          <Routes>
+            <Route path="/" element={<Navigate to="/dashboard" replace />} />
+            <Route path="/dashboard" element={<Dashboard />} />
+            <Route path="/properties" element={<Properties />} />
+            <Route path="/properties/:id" element={<PropertyDetails />} />
+            <Route path="/tenants" element={<Tenants />} />
+            <Route path="/tenants/:id" element={<TenantDetails />} />
+            <Route path="/maintenance" element={<Maintenance />} />
+            <Route path="/financials" element={<Financials />} />
+            <Route path="/alerts" element={<Alerts />} />
+            <Route path="/reports" element={<Reports />} />
+          </Routes>
         </Box>
-      </Router>
+      </Box>
     </ThemeProvider>
   );
 };
