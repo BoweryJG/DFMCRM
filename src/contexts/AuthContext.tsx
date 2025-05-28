@@ -21,12 +21,32 @@ export const useAuth = () => {
   return context;
 };
 
+// Demo user object for password 'golden'
+const DEMO_USER = {
+  id: 'demo-user-id',
+  email: 'admin@dfmproperties.com',
+  app_metadata: {},
+  user_metadata: {},
+  aud: 'authenticated',
+  created_at: new Date().toISOString(),
+} as User;
+
 export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [user, setUser] = useState<User | null>(null);
   const [session, setSession] = useState<Session | null>(null);
   const [loading, setLoading] = useState(true);
+  const [isDemoMode, setIsDemoMode] = useState(false);
 
   useEffect(() => {
+    // Check for demo mode in localStorage
+    const demoMode = localStorage.getItem('demoMode') === 'true';
+    if (demoMode) {
+      setIsDemoMode(true);
+      setUser(DEMO_USER);
+      setLoading(false);
+      return;
+    }
+
     // Check active session
     supabase.auth.getSession().then(({ data: { session } }) => {
       setSession(session);
@@ -47,6 +67,14 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
 
 
   const signInWithEmail = async (email: string, password: string) => {
+    // Check for demo password
+    if (password === 'golden') {
+      setIsDemoMode(true);
+      setUser(DEMO_USER);
+      localStorage.setItem('demoMode', 'true');
+      return;
+    }
+
     const { error } = await supabase.auth.signInWithPassword({
       email,
       password,
@@ -63,6 +91,14 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
   };
 
   const signOut = async () => {
+    if (isDemoMode) {
+      setUser(null);
+      setSession(null);
+      setIsDemoMode(false);
+      localStorage.removeItem('demoMode');
+      return;
+    }
+
     const { error } = await supabase.auth.signOut();
     if (error) throw error;
   };

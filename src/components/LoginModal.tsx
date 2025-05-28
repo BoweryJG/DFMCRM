@@ -15,7 +15,6 @@ import {
 } from '@mui/material';
 import {
   Close as CloseIcon,
-  Email as EmailIcon,
   Lock as LockIcon,
   Visibility,
   VisibilityOff,
@@ -29,9 +28,7 @@ interface LoginModalProps {
 
 export const LoginModal: React.FC<LoginModalProps> = ({ open, onClose }) => {
   const theme = useTheme();
-  const { signInWithEmail, signUp } = useAuth();
-  const [isSignUp, setIsSignUp] = useState(false);
-  const [email, setEmail] = useState('admin@dfmproperties.com');
+  const { signInWithEmail } = useAuth();
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -43,11 +40,9 @@ export const LoginModal: React.FC<LoginModalProps> = ({ open, onClose }) => {
     setError(null);
 
     try {
-      if (isSignUp) {
-        await signUp(email, password);
-      } else {
-        await signInWithEmail(email, password);
-      }
+      // Always use the hardcoded email for login
+      const hardcodedEmail = 'admin@dfmproperties.com';
+      await signInWithEmail(hardcodedEmail, password);
       onClose();
     } catch (err: any) {
       setError(err.message || 'An error occurred');
@@ -59,10 +54,8 @@ export const LoginModal: React.FC<LoginModalProps> = ({ open, onClose }) => {
 
   const handleClose = () => {
     if (!loading) {
-      setEmail('');
       setPassword('');
       setError(null);
-      setIsSignUp(false);
       onClose();
     }
   };
@@ -97,13 +90,13 @@ export const LoginModal: React.FC<LoginModalProps> = ({ open, onClose }) => {
             color: theme.palette.primary.main,
             letterSpacing: '-0.5px'
           }}>
-            Welcome to DFM
+            DFM Properties
           </Typography>
           <Typography variant="body2" sx={{ 
             color: theme.palette.text.secondary,
             mt: 0.5
           }}>
-            {isSignUp ? 'Create your account' : 'Enter your password to continue'}
+            Enter password to continue
           </Typography>
         </Box>
         <IconButton 
@@ -134,29 +127,10 @@ export const LoginModal: React.FC<LoginModalProps> = ({ open, onClose }) => {
 
         {/* Email Form */}
         <Box component="form" onSubmit={handleEmailAuth} sx={{ mt: 3 }}>
-          {isSignUp && (
-            <TextField
-              fullWidth
-              label="Email"
-              type="email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              disabled={loading}
-              required
-              sx={{ mb: 2 }}
-              InputProps={{
-                startAdornment: (
-                  <InputAdornment position="start">
-                    <EmailIcon sx={{ color: theme.palette.text.secondary }} />
-                  </InputAdornment>
-                ),
-              }}
-            />
-          )}
 
           <TextField
             fullWidth
-            label="Password"
+            label="Password (hint: golden)"
             type={showPassword ? 'text' : 'password'}
             value={password}
             onChange={(e) => setPassword(e.target.value)}
@@ -205,32 +179,11 @@ export const LoginModal: React.FC<LoginModalProps> = ({ open, onClose }) => {
             {loading ? (
               <CircularProgress size={24} color="inherit" />
             ) : (
-              isSignUp ? 'Create Account' : 'Sign In'
+              'Sign In'
             )}
           </Button>
         </Box>
 
-        <Box sx={{ mt: 3, textAlign: 'center' }}>
-          <Typography variant="body2" color="text.secondary">
-            {isSignUp ? 'Already have an account?' : "Don't have an account?"}{' '}
-            <Button
-              onClick={() => setIsSignUp(!isSignUp)}
-              disabled={loading}
-              sx={{
-                textTransform: 'none',
-                fontWeight: 600,
-                p: 0,
-                minWidth: 'auto',
-                '&:hover': {
-                  backgroundColor: 'transparent',
-                  textDecoration: 'underline',
-                },
-              }}
-            >
-              {isSignUp ? 'Sign In' : 'Sign Up'}
-            </Button>
-          </Typography>
-        </Box>
       </DialogContent>
     </Dialog>
   );
