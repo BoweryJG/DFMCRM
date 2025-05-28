@@ -14,34 +14,38 @@ const summaryData = [
   { 
     title: 'Properties', 
     value: '9', 
-    icon: <ApartmentIcon sx={{ fontSize: 40 }} />, 
-    color: '#1e3a5f',
+    icon: <ApartmentIcon sx={{ fontSize: 32 }} />, 
+    color: '#1a237e',
     trend: '+2 this year',
-    subtitle: '240+ total units'
+    subtitle: '240+ total units',
+    gradient: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)'
   },
   { 
     title: 'Occupancy', 
     value: '94%', 
-    icon: <CheckCircleIcon sx={{ fontSize: 40 }} />, 
-    color: '#2e7d32',
+    icon: <CheckCircleIcon sx={{ fontSize: 32 }} />, 
+    color: '#1b5e20',
     trend: '↑ 3% vs last month',
-    subtitle: '226 of 240 units'
+    subtitle: '226 of 240 units',
+    gradient: 'linear-gradient(135deg, #66bb6a 0%, #43a047 100%)'
   },
   { 
     title: 'Monthly Revenue', 
     value: '$312K', 
-    icon: <TrendingUpIcon sx={{ fontSize: 40 }} />, 
-    color: '#1976d2',
+    icon: <TrendingUpIcon sx={{ fontSize: 32 }} />, 
+    color: '#0d47a1',
     trend: '↑ 8% YoY',
-    subtitle: '$3.74M annually'
+    subtitle: '$3.74M annually',
+    gradient: 'linear-gradient(135deg, #42a5f5 0%, #1e88e5 100%)'
   },
   { 
     title: 'Action Items', 
     value: '5', 
-    icon: <WarningIcon sx={{ fontSize: 40 }} />, 
-    color: '#ed6c02',
+    icon: <WarningIcon sx={{ fontSize: 32 }} />, 
+    color: '#e65100',
     trend: '2 urgent',
-    subtitle: '3 maintenance'
+    subtitle: '3 maintenance',
+    gradient: 'linear-gradient(135deg, #ffa726 0%, #fb8c00 100%)'
   },
 ];
 
@@ -58,10 +62,10 @@ const propertyPerformance = [
 
 // Tenant type breakdown
 const tenantTypes = [
-  { name: 'Graduate Students', value: 45, color: '#1e3a5f' },
-  { name: 'Medical Students', value: 25, color: '#2196f3' },
-  { name: 'Young Professionals', value: 20, color: '#64b5f6' },
-  { name: 'Commercial', value: 10, color: '#90caf9' },
+  { name: 'Graduate Students', value: 45, color: '#5c6bc0' },
+  { name: 'Medical Students', value: 25, color: '#7986cb' },
+  { name: 'Young Professionals', value: 20, color: '#9fa8da' },
+  { name: 'Commercial', value: 10, color: '#c5cae9' },
 ];
 
 // Monthly revenue trend - actual DFM scale
@@ -88,7 +92,11 @@ const Dashboard: React.FC = () => {
   const [selectedProperty, setSelectedProperty] = useState<string | null>(null);
 
   return (
-    <Box sx={{ backgroundColor: '#f5f5f5', minHeight: '100vh', p: { xs: 2, sm: 3 } }}>
+    <Box sx={{ 
+      backgroundColor: theme => theme.palette.grey[50], 
+      minHeight: '100vh', 
+      p: { xs: 2, sm: 3, md: 4 } 
+    }}>
       {/* Header with branding */}
       <Box sx={{ 
         mb: 4, 
@@ -100,16 +108,18 @@ const Dashboard: React.FC = () => {
       }}>
         <Box>
           <Typography variant="h3" sx={{ 
-            fontWeight: 'bold', 
-            color: '#1e3a5f', 
-            mb: 1,
-            fontSize: { xs: '1.5rem', sm: '2rem', md: '3rem' }
+            fontWeight: 700, 
+            color: theme => theme.palette.primary.dark, 
+            mb: 0.5,
+            fontSize: { xs: '1.75rem', sm: '2.25rem', md: '2.75rem' },
+            letterSpacing: '-0.02em'
           }}>
             DFM Properties
           </Typography>
           <Typography variant="h6" sx={{ 
-            color: '#666',
-            fontSize: { xs: '0.875rem', sm: '1rem', md: '1.25rem' }
+            color: theme => theme.palette.text.secondary,
+            fontSize: { xs: '0.875rem', sm: '0.95rem', md: '1.125rem' },
+            fontWeight: 400
           }}>
             Scranton's Premier Student Housing • {new Date().toLocaleDateString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })}
           </Typography>
@@ -119,8 +129,26 @@ const Dashboard: React.FC = () => {
           gap: 2,
           flexWrap: 'wrap'
         }}>
-          <Chip icon={<SchoolIcon />} label="University District" color="primary" />
-          <Chip icon={<LocationOnIcon />} label="Downtown Scranton" color="secondary" />
+          <Chip 
+            icon={<SchoolIcon />} 
+            label="University District" 
+            sx={{ 
+              backgroundColor: theme => theme.palette.primary.main,
+              color: 'white',
+              fontWeight: 500,
+              '& .MuiChip-icon': { color: 'white' }
+            }} 
+          />
+          <Chip 
+            icon={<LocationOnIcon />} 
+            label="Downtown Scranton" 
+            sx={{ 
+              backgroundColor: theme => theme.palette.secondary.main,
+              color: 'white',
+              fontWeight: 500,
+              '& .MuiChip-icon': { color: 'white' }
+            }} 
+          />
         </Box>
       </Box>
 
@@ -130,15 +158,33 @@ const Dashboard: React.FC = () => {
           <Grid item xs={12} sm={6} md={3} key={index}>
             <Card 
               sx={{ 
-                p: { xs: 2, sm: 3 }, 
+                p: { xs: 2.5, sm: 3 }, 
                 height: '100%',
                 backgroundColor: 'white',
-                boxShadow: '0 4px 20px rgba(0,0,0,0.08)',
+                boxShadow: theme => `0 1px 3px ${theme.palette.mode === 'dark' ? 'rgba(0,0,0,0.3)' : 'rgba(0,0,0,0.08)'}`,
                 cursor: 'pointer',
-                transition: 'all 0.3s ease',
+                transition: 'all 0.2s ease-in-out',
+                border: theme => `1px solid ${theme.palette.divider}`,
+                borderRadius: 2,
+                position: 'relative',
+                overflow: 'hidden',
                 '&:hover': {
-                  transform: 'translateY(-4px)',
-                  boxShadow: '0 8px 30px rgba(0,0,0,0.12)',
+                  transform: 'translateY(-2px)',
+                  boxShadow: theme => `0 4px 12px ${theme.palette.mode === 'dark' ? 'rgba(0,0,0,0.4)' : 'rgba(0,0,0,0.15)'}`,
+                  '&::before': {
+                    opacity: 1
+                  }
+                },
+                '&::before': {
+                  content: '""',
+                  position: 'absolute',
+                  top: 0,
+                  left: 0,
+                  right: 0,
+                  height: '4px',
+                  background: item.gradient,
+                  opacity: 0,
+                  transition: 'opacity 0.3s ease'
                 }
               }}
               onClick={() => {
@@ -149,23 +195,28 @@ const Dashboard: React.FC = () => {
               <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
                 <Box>
                   <Typography variant="h3" sx={{ 
-                    fontWeight: 'bold', 
+                    fontWeight: 700, 
                     color: item.color, 
-                    mb: 1,
-                    fontSize: { xs: '1.75rem', sm: '2.5rem', md: '3rem' }
+                    mb: 0.5,
+                    fontSize: { xs: '2rem', sm: '2.25rem', md: '2.5rem' },
+                    letterSpacing: '-0.02em',
+                    lineHeight: 1
                   }}>
                     {item.value}
                   </Typography>
                   <Typography variant="h6" sx={{ 
-                    color: '#666', 
-                    mb: 0.5,
-                    fontSize: { xs: '1rem', sm: '1.25rem' }
+                    color: theme => theme.palette.text.primary, 
+                    mb: 0.25,
+                    fontSize: { xs: '0.95rem', sm: '1.125rem' },
+                    fontWeight: 600,
+                    letterSpacing: '0.01em'
                   }}>
                     {item.title}
                   </Typography>
                   <Typography variant="body2" sx={{ 
-                    color: '#999',
-                    fontSize: { xs: '0.75rem', sm: '0.875rem' }
+                    color: theme => theme.palette.text.secondary,
+                    fontSize: { xs: '0.8rem', sm: '0.875rem' },
+                    fontWeight: 400
                   }}>
                     {item.subtitle}
                   </Typography>
@@ -173,14 +224,23 @@ const Dashboard: React.FC = () => {
                     label={item.trend} 
                     size="small" 
                     sx={{ 
-                      mt: 1, 
-                      backgroundColor: item.trend.includes('↑') ? '#e8f5e9' : '#fff3e0',
-                      color: item.trend.includes('↑') ? '#2e7d32' : '#e65100',
-                      fontWeight: 'bold'
+                      mt: 1.5, 
+                      backgroundColor: item.trend.includes('↑') ? 'rgba(76, 175, 80, 0.08)' : 'rgba(255, 152, 0, 0.08)',
+                      color: item.trend.includes('↑') ? '#2e7d32' : '#f57c00',
+                      fontWeight: 600,
+                      fontSize: '0.75rem',
+                      height: '24px',
+                      border: item.trend.includes('↑') ? '1px solid rgba(76, 175, 80, 0.2)' : '1px solid rgba(255, 152, 0, 0.2)'
                     }} 
                   />
                 </Box>
-                <Box sx={{ color: item.color, opacity: 0.2 }}>
+                <Box sx={{ 
+                  color: item.color, 
+                  opacity: 0.1,
+                  position: 'absolute',
+                  right: 16,
+                  top: 16
+                }}>
                   {item.icon}
                 </Box>
               </Box>
@@ -192,42 +252,71 @@ const Dashboard: React.FC = () => {
       {/* Quick Actions Panel - ADD-friendly */}
       <Grid container spacing={{ xs: 2, sm: 3 }} sx={{ mb: 4 }}>
         <Grid item xs={12} md={4}>
-          <Card sx={{ p: { xs: 2, sm: 3 }, height: '100%', boxShadow: '0 4px 20px rgba(0,0,0,0.08)' }}>
+          <Card sx={{ 
+            p: { xs: 2.5, sm: 3 }, 
+            height: '100%', 
+            boxShadow: theme => `0 1px 3px ${theme.palette.mode === 'dark' ? 'rgba(0,0,0,0.3)' : 'rgba(0,0,0,0.08)'}`,
+            border: theme => `1px solid ${theme.palette.divider}`,
+            borderRadius: 2
+          }}>
             <Typography variant="h5" sx={{ 
-              fontWeight: 'bold', 
-              mb: 2, 
-              color: '#1e3a5f',
-              fontSize: { xs: '1.125rem', sm: '1.5rem' }
+              fontWeight: 600, 
+              mb: 3, 
+              color: theme => theme.palette.primary.dark,
+              fontSize: { xs: '1.125rem', sm: '1.375rem' },
+              display: 'flex',
+              alignItems: 'center',
+              gap: 1
             }}>
-              🎯 Quick Actions
+              <Box component="span" sx={{ fontSize: '1.25rem' }}>🎯</Box>
+              Quick Actions
             </Typography>
             {quickActions.map((action) => (
               <Box 
                 key={action.id}
                 sx={{ 
                   p: 2, 
-                  mb: 1, 
-                  borderRadius: 2,
-                  backgroundColor: action.urgent ? '#fff3e0' : '#f5f5f5',
-                  border: action.urgent ? '2px solid #ff9800' : '1px solid #e0e0e0',
+                  mb: 1.5, 
+                  borderRadius: 1.5,
+                  backgroundColor: action.urgent 
+                    ? 'rgba(255, 152, 0, 0.04)' 
+                    : theme => theme.palette.grey[50],
+                  border: action.urgent 
+                    ? '1px solid rgba(255, 152, 0, 0.3)' 
+                    : theme => `1px solid ${theme.palette.divider}`,
                   cursor: 'pointer',
-                  transition: 'all 0.2s',
+                  transition: 'all 0.15s ease',
                   '&:hover': {
-                    backgroundColor: action.urgent ? '#ffe0b2' : '#eeeeee',
-                    transform: 'translateX(4px)'
+                    backgroundColor: action.urgent 
+                      ? 'rgba(255, 152, 0, 0.08)' 
+                      : theme => theme.palette.action.hover,
+                    transform: 'translateX(2px)',
+                    borderColor: action.urgent 
+                      ? 'rgba(255, 152, 0, 0.5)' 
+                      : theme => theme.palette.primary.light
                   }
                 }}
               >
                 <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
                   <Box>
-                    <Typography variant="subtitle2" sx={{ fontWeight: 'bold' }}>
+                    <Typography variant="subtitle2" sx={{ 
+                      fontWeight: 600,
+                      color: theme => theme.palette.text.primary,
+                      mb: 0.25
+                    }}>
                       {action.property}
                     </Typography>
-                    <Typography variant="body2" sx={{ color: '#666' }}>
+                    <Typography variant="body2" sx={{ 
+                      color: theme => theme.palette.text.secondary,
+                      fontSize: '0.875rem'
+                    }}>
                       {action.issue}
                     </Typography>
                   </Box>
-                  {action.urgent && <WarningIcon sx={{ color: '#ff9800' }} />}
+                  {action.urgent && <WarningIcon sx={{ 
+                    color: '#ff9800', 
+                    fontSize: '1.25rem' 
+                  }} />}
                 </Box>
               </Box>
             ))}
@@ -236,14 +325,24 @@ const Dashboard: React.FC = () => {
 
         {/* Property Performance Visual */}
         <Grid item xs={12} md={8}>
-          <Card sx={{ p: { xs: 2, sm: 3 }, height: '100%', boxShadow: '0 4px 20px rgba(0,0,0,0.08)' }}>
+          <Card sx={{ 
+            p: { xs: 2.5, sm: 3 }, 
+            height: '100%', 
+            boxShadow: theme => `0 1px 3px ${theme.palette.mode === 'dark' ? 'rgba(0,0,0,0.3)' : 'rgba(0,0,0,0.08)'}`,
+            border: theme => `1px solid ${theme.palette.divider}`,
+            borderRadius: 2
+          }}>
             <Typography variant="h5" sx={{ 
-              fontWeight: 'bold', 
-              mb: 2, 
-              color: '#1e3a5f',
-              fontSize: { xs: '1.125rem', sm: '1.5rem' }
+              fontWeight: 600, 
+              mb: 3, 
+              color: theme => theme.palette.primary.dark,
+              fontSize: { xs: '1.125rem', sm: '1.375rem' },
+              display: 'flex',
+              alignItems: 'center',
+              gap: 1
             }}>
-              📊 Property Performance
+              <Box component="span" sx={{ fontSize: '1.25rem' }}>📊</Box>
+              Property Performance
             </Typography>
             <Grid container spacing={2}>
               {propertyPerformance.map((property) => (
@@ -251,45 +350,70 @@ const Dashboard: React.FC = () => {
                   <Box 
                     sx={{ 
                       p: 2, 
-                      borderRadius: 2,
-                      backgroundColor: selectedProperty === property.name ? '#e3f2fd' : '#f5f5f5',
-                      border: selectedProperty === property.name ? '2px solid #2196f3' : '1px solid #e0e0e0',
+                      borderRadius: 1.5,
+                      backgroundColor: selectedProperty === property.name 
+                        ? theme => theme.palette.primary.main + '08'
+                        : theme => theme.palette.grey[50],
+                      border: selectedProperty === property.name 
+                        ? theme => `2px solid ${theme.palette.primary.main}`
+                        : theme => `1px solid ${theme.palette.divider}`,
                       cursor: 'pointer',
-                      transition: 'all 0.2s',
+                      transition: 'all 0.15s ease',
                       '&:hover': {
-                        backgroundColor: '#e3f2fd',
+                        backgroundColor: theme => theme.palette.primary.main + '08',
+                        borderColor: theme => theme.palette.primary.light
                       }
                     }}
                     onClick={() => setSelectedProperty(property.name)}
                   >
-                    <Typography variant="subtitle2" sx={{ fontWeight: 'bold', mb: 1 }}>
+                    <Typography variant="subtitle2" sx={{ 
+                      fontWeight: 600, 
+                      mb: 1,
+                      color: theme => theme.palette.text.primary
+                    }}>
                       {property.name}
                     </Typography>
                     <Box sx={{ display: 'flex', alignItems: 'center', mb: 1 }}>
-                      <Typography variant="body2" sx={{ color: '#666', mr: 1 }}>Occupancy:</Typography>
+                      <Typography variant="body2" sx={{ 
+                        color: theme => theme.palette.text.secondary, 
+                        mr: 1,
+                        fontSize: '0.8125rem'
+                      }}>Occupancy:</Typography>
                       <Box sx={{ flexGrow: 1, mr: 1 }}>
                         <LinearProgress 
                           variant="determinate" 
                           value={property.occupancy} 
                           sx={{ 
-                            height: 8, 
-                            borderRadius: 4,
-                            backgroundColor: '#e0e0e0',
+                            height: 6, 
+                            borderRadius: 3,
+                            backgroundColor: theme => theme.palette.grey[200],
                             '& .MuiLinearProgress-bar': {
-                              backgroundColor: property.occupancy > 90 ? '#4caf50' : '#ff9800'
+                              backgroundColor: property.occupancy > 90 ? '#66bb6a' : '#ffa726',
+                              borderRadius: 3
                             }
                           }}
                         />
                       </Box>
-                      <Typography variant="body2" sx={{ fontWeight: 'bold' }}>
+                      <Typography variant="body2" sx={{ 
+                        fontWeight: 600,
+                        color: property.occupancy > 90 ? '#2e7d32' : '#f57c00',
+                        fontSize: '0.8125rem'
+                      }}>
                         {property.occupancy}%
                       </Typography>
                     </Box>
                     <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                      <Typography variant="body2" sx={{ color: '#666' }}>
+                      <Typography variant="body2" sx={{ 
+                        color: theme => theme.palette.text.secondary,
+                        fontSize: '0.8125rem'
+                      }}>
                         {property.units} units
                       </Typography>
-                      <Typography variant="body2" sx={{ fontWeight: 'bold', color: '#1976d2' }}>
+                      <Typography variant="body2" sx={{ 
+                        fontWeight: 600, 
+                        color: theme => theme.palette.primary.main,
+                        fontSize: '0.8125rem'
+                      }}>
                         ${(property.revenue / 1000).toFixed(0)}K/mo
                       </Typography>
                     </Box>
@@ -304,36 +428,54 @@ const Dashboard: React.FC = () => {
       {/* Revenue and Tenant Mix */}
       <Grid container spacing={{ xs: 2, sm: 3 }}>
         <Grid item xs={12} md={8}>
-          <Card sx={{ p: { xs: 2, sm: 3 }, boxShadow: '0 4px 20px rgba(0,0,0,0.08)' }}>
+          <Card sx={{ 
+            p: { xs: 2.5, sm: 3 }, 
+            boxShadow: theme => `0 1px 3px ${theme.palette.mode === 'dark' ? 'rgba(0,0,0,0.3)' : 'rgba(0,0,0,0.08)'}`,
+            border: theme => `1px solid ${theme.palette.divider}`,
+            borderRadius: 2
+          }}>
             <Typography variant="h5" sx={{ 
-              fontWeight: 'bold', 
-              mb: 2, 
-              color: '#1e3a5f',
-              fontSize: { xs: '1.125rem', sm: '1.5rem' }
+              fontWeight: 600, 
+              mb: 3, 
+              color: theme => theme.palette.primary.dark,
+              fontSize: { xs: '1.125rem', sm: '1.375rem' },
+              display: 'flex',
+              alignItems: 'center',
+              gap: 1
             }}>
-              💰 Revenue Trend
+              <Box component="span" sx={{ fontSize: '1.25rem' }}>💰</Box>
+              Revenue Trend
             </Typography>
             <ResponsiveContainer width="100%" height={300}>
               <BarChart data={revenueData}>
-                <CartesianGrid strokeDasharray="3 3" stroke="#f0f0f0" />
+                <CartesianGrid strokeDasharray="3 3" stroke="#e0e0e0" strokeOpacity={0.5} />
                 <XAxis dataKey="name" />
                 <YAxis tickFormatter={(value) => `$${value / 1000}K`} />
                 <Tooltip formatter={(value: any) => `$${(value / 1000).toFixed(0)}K`} />
-                <Bar dataKey="revenue" fill="#1976d2" radius={[8, 8, 0, 0]} />
-                <Bar dataKey="target" fill="#e0e0e0" radius={[8, 8, 0, 0]} />
+                <Bar dataKey="revenue" fill="#5c6bc0" radius={[6, 6, 0, 0]} />
+                <Bar dataKey="target" fill="#e8eaf6" radius={[6, 6, 0, 0]} />
               </BarChart>
             </ResponsiveContainer>
           </Card>
         </Grid>
         <Grid item xs={12} md={4}>
-          <Card sx={{ p: { xs: 2, sm: 3 }, boxShadow: '0 4px 20px rgba(0,0,0,0.08)' }}>
+          <Card sx={{ 
+            p: { xs: 2.5, sm: 3 }, 
+            boxShadow: theme => `0 1px 3px ${theme.palette.mode === 'dark' ? 'rgba(0,0,0,0.3)' : 'rgba(0,0,0,0.08)'}`,
+            border: theme => `1px solid ${theme.palette.divider}`,
+            borderRadius: 2
+          }}>
             <Typography variant="h5" sx={{ 
-              fontWeight: 'bold', 
-              mb: 2, 
-              color: '#1e3a5f',
-              fontSize: { xs: '1.125rem', sm: '1.5rem' }
+              fontWeight: 600, 
+              mb: 3, 
+              color: theme => theme.palette.primary.dark,
+              fontSize: { xs: '1.125rem', sm: '1.375rem' },
+              display: 'flex',
+              alignItems: 'center',
+              gap: 1
             }}>
-              👥 Tenant Mix
+              <Box component="span" sx={{ fontSize: '1.25rem' }}>👥</Box>
+              Tenant Mix
             </Typography>
             <ResponsiveContainer width="100%" height={300}>
               <PieChart>
