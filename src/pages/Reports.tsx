@@ -131,22 +131,34 @@ const Reports: React.FC = () => {
   };
 
   return (
-    <Box sx={{ backgroundColor: '#f5f5f5', minHeight: '100vh', p: 3 }}>
+    <Box sx={{ backgroundColor: '#f5f5f5', minHeight: '100vh', p: { xs: 2, sm: 3 } }}>
       {/* Header */}
       <Box sx={{ mb: 4 }}>
-        <Typography variant="h3" sx={{ fontWeight: 'bold', color: '#1e3a5f', mb: 1 }}>
+        <Typography variant="h3" sx={{ 
+          fontWeight: 'bold', 
+          color: '#1e3a5f', 
+          mb: 1,
+          fontSize: { xs: '1.5rem', sm: '2rem', md: '3rem' }
+        }}>
           Reports & Analytics
         </Typography>
-        <Typography variant="h6" sx={{ color: '#666' }}>
+        <Typography variant="h6" sx={{ 
+          color: '#666',
+          fontSize: { xs: '0.875rem', sm: '1rem', md: '1.25rem' }
+        }}>
           Generate and view comprehensive property reports
         </Typography>
       </Box>
 
       {/* Quick Actions */}
-      <Grid container spacing={3} sx={{ mb: 4 }}>
+      <Grid container spacing={{ xs: 2, sm: 3 }} sx={{ mb: 4 }}>
         <Grid item xs={12} md={8}>
-          <Card sx={{ p: 3 }}>
-            <Typography variant="h6" sx={{ fontWeight: 'bold', mb: 2 }}>
+          <Card sx={{ p: { xs: 2, sm: 3 } }}>
+            <Typography variant="h6" sx={{ 
+              fontWeight: 'bold', 
+              mb: 2,
+              fontSize: { xs: '1.125rem', sm: '1.25rem' }
+            }}>
               Quick Report Generation
             </Typography>
             <Grid container spacing={2}>
@@ -195,32 +207,48 @@ const Reports: React.FC = () => {
           </Card>
         </Grid>
         <Grid item xs={12} md={4}>
-          <Card sx={{ p: 3, height: '100%', backgroundColor: '#1e3a5f', color: 'white' }}>
-            <Typography variant="h6" sx={{ fontWeight: 'bold', mb: 2 }}>
+          <Card sx={{ p: { xs: 2, sm: 3 }, height: '100%', backgroundColor: '#1e3a5f', color: 'white' }}>
+            <Typography variant="h6" sx={{ 
+              fontWeight: 'bold', 
+              mb: 2,
+              fontSize: { xs: '1.125rem', sm: '1.25rem' }
+            }}>
               Quick Stats
             </Typography>
             <Grid container spacing={2}>
               <Grid item xs={6}>
                 <Typography variant="body2" sx={{ opacity: 0.8 }}>YTD Revenue</Typography>
-                <Typography variant="h5" sx={{ fontWeight: 'bold' }}>
+                <Typography variant="h5" sx={{ 
+                  fontWeight: 'bold',
+                  fontSize: { xs: '1.125rem', sm: '1.5rem' }
+                }}>
                   {formatCurrency(keyMetrics.ytdRevenue)}
                 </Typography>
               </Grid>
               <Grid item xs={6}>
                 <Typography variant="body2" sx={{ opacity: 0.8 }}>Net Income</Typography>
-                <Typography variant="h5" sx={{ fontWeight: 'bold' }}>
+                <Typography variant="h5" sx={{ 
+                  fontWeight: 'bold',
+                  fontSize: { xs: '1.125rem', sm: '1.5rem' }
+                }}>
                   {formatCurrency(keyMetrics.netIncome)}
                 </Typography>
               </Grid>
               <Grid item xs={6}>
                 <Typography variant="body2" sx={{ opacity: 0.8 }}>Occupancy</Typography>
-                <Typography variant="h5" sx={{ fontWeight: 'bold' }}>
+                <Typography variant="h5" sx={{ 
+                  fontWeight: 'bold',
+                  fontSize: { xs: '1.125rem', sm: '1.5rem' }
+                }}>
                   {keyMetrics.avgOccupancy}%
                 </Typography>
               </Grid>
               <Grid item xs={6}>
                 <Typography variant="body2" sx={{ opacity: 0.8 }}>Collection Rate</Typography>
-                <Typography variant="h5" sx={{ fontWeight: 'bold' }}>
+                <Typography variant="h5" sx={{ 
+                  fontWeight: 'bold',
+                  fontSize: { xs: '1.125rem', sm: '1.5rem' }
+                }}>
                   {keyMetrics.collectionRate}%
                 </Typography>
               </Grid>
@@ -230,10 +258,14 @@ const Reports: React.FC = () => {
       </Grid>
 
       {/* Charts Row */}
-      <Grid container spacing={3} sx={{ mb: 4 }}>
+      <Grid container spacing={{ xs: 2, sm: 3 }} sx={{ mb: 4 }}>
         <Grid item xs={12} md={8}>
-          <Card sx={{ p: 3 }}>
-            <Typography variant="h6" sx={{ fontWeight: 'bold', mb: 2 }}>
+          <Card sx={{ p: { xs: 2, sm: 3 } }}>
+            <Typography variant="h6" sx={{ 
+              fontWeight: 'bold', 
+              mb: 2,
+              fontSize: { xs: '1rem', sm: '1.25rem' }
+            }}>
               Property Performance - Net Operating Income
             </Typography>
             <ResponsiveContainer width="100%" height={300}>
@@ -250,8 +282,12 @@ const Reports: React.FC = () => {
           </Card>
         </Grid>
         <Grid item xs={12} md={4}>
-          <Card sx={{ p: 3 }}>
-            <Typography variant="h6" sx={{ fontWeight: 'bold', mb: 2 }}>
+          <Card sx={{ p: { xs: 2, sm: 3 } }}>
+            <Typography variant="h6" sx={{ 
+              fontWeight: 'bold', 
+              mb: 2,
+              fontSize: { xs: '1rem', sm: '1.25rem' }
+            }}>
               Expense Distribution
             </Typography>
             <ResponsiveContainer width="100%" height={300}>
@@ -278,10 +314,10 @@ const Reports: React.FC = () => {
       </Grid>
 
       {/* Report Templates and Recent Reports */}
-      <Grid container spacing={3}>
+      <Grid container spacing={{ xs: 2, sm: 3 }}>
         <Grid item xs={12} md={6}>
           <Card sx={{ height: '100%' }}>
-            <Box sx={{ p: 3, borderBottom: '1px solid #eee' }}>
+            <Box sx={{ p: { xs: 2, sm: 3 }, borderBottom: '1px solid #eee' }}>
               <Typography variant="h6" sx={{ fontWeight: 'bold' }}>
                 Report Templates
               </Typography>
@@ -321,18 +357,18 @@ const Reports: React.FC = () => {
         </Grid>
         <Grid item xs={12} md={6}>
           <Card sx={{ height: '100%' }}>
-            <Box sx={{ p: 3, borderBottom: '1px solid #eee' }}>
+            <Box sx={{ p: { xs: 2, sm: 3 }, borderBottom: '1px solid #eee' }}>
               <Typography variant="h6" sx={{ fontWeight: 'bold' }}>
                 Recent Reports
               </Typography>
             </Box>
-            <TableContainer>
+            <TableContainer sx={{ overflowX: 'auto' }}>
               <Table>
                 <TableHead>
                   <TableRow>
-                    <TableCell>Report Name</TableCell>
-                    <TableCell>Date</TableCell>
-                    <TableCell>Size</TableCell>
+                    <TableCell sx={{ minWidth: { xs: 150, sm: 'auto' } }}>Report Name</TableCell>
+                    <TableCell sx={{ display: { xs: 'none', sm: 'table-cell' } }}>Date</TableCell>
+                    <TableCell sx={{ display: { xs: 'none', sm: 'table-cell' } }}>Size</TableCell>
                     <TableCell align="center">Actions</TableCell>
                   </TableRow>
                 </TableHead>
@@ -345,8 +381,8 @@ const Reports: React.FC = () => {
                           <Chip label={report.type} size="small" variant="outlined" />
                         </Box>
                       </TableCell>
-                      <TableCell>{report.date}</TableCell>
-                      <TableCell>{report.size}</TableCell>
+                      <TableCell sx={{ display: { xs: 'none', sm: 'table-cell' } }}>{report.date}</TableCell>
+                      <TableCell sx={{ display: { xs: 'none', sm: 'table-cell' } }}>{report.size}</TableCell>
                       <TableCell align="center">
                         <IconButton size="small">
                           <DownloadIcon />

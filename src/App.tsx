@@ -1,11 +1,9 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Routes, Route, Navigate } from 'react-router-dom';
-import { Box, CssBaseline, ThemeProvider } from '@mui/material';
-import theme from './theme';
+import { Box, useTheme, useMediaQuery } from '@mui/material';
 
 // Layout components
-import Header from './components/layout/Header';
-import Sidebar from './components/layout/Sidebar';
+import { Navigation } from './components/Navigation';
 
 // Pages
 import Dashboard from './pages/Dashboard';
@@ -19,47 +17,38 @@ import Alerts from './pages/Alerts';
 import Reports from './pages/Reports';
 
 const App: React.FC = () => {
-  const [sidebarOpen, setSidebarOpen] = useState(true);
-
-  const toggleSidebar = () => {
-    setSidebarOpen(!sidebarOpen);
-  };
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down('md'));
 
   return (
-    <ThemeProvider theme={theme}>
-      <CssBaseline />
-      <Box sx={{ display: 'flex' }}>
-        <Header toggleSidebar={toggleSidebar} />
-        <Sidebar open={sidebarOpen} />
-        <Box
-          component="main"
-          sx={{
-            flexGrow: 1,
-            p: 3,
-            mt: 8,
-            ml: { sm: sidebarOpen ? 30 : 7 },
-            width: { sm: `calc(100% - ${sidebarOpen ? 240 : 56}px)` },
-            transition: theme.transitions.create(['margin', 'width'], {
-              easing: theme.transitions.easing.sharp,
-              duration: theme.transitions.duration.leavingScreen,
-            }),
-          }}
-        >
-          <Routes>
-            <Route path="/" element={<Navigate to="/dashboard" replace />} />
-            <Route path="/dashboard" element={<Dashboard />} />
-            <Route path="/properties" element={<Properties />} />
-            <Route path="/properties/:id" element={<PropertyDetails />} />
-            <Route path="/tenants" element={<Tenants />} />
-            <Route path="/tenants/:id" element={<TenantDetails />} />
-            <Route path="/maintenance" element={<Maintenance />} />
-            <Route path="/financials" element={<Financials />} />
-            <Route path="/alerts" element={<Alerts />} />
-            <Route path="/reports" element={<Reports />} />
-          </Routes>
-        </Box>
+    <Box sx={{ display: 'flex', minHeight: '100vh' }}>
+      <Navigation />
+      <Box
+        component="main"
+        sx={{
+          flexGrow: 1,
+          p: { xs: 2, sm: 3 },
+          mt: { xs: 8, md: 0 },
+          ml: { md: '240px' },
+          width: { xs: '100%', md: 'calc(100% - 240px)' },
+          backgroundColor: theme.palette.background.default,
+          minHeight: '100vh',
+        }}
+      >
+        <Routes>
+          <Route path="/" element={<Navigate to="/dashboard" replace />} />
+          <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="/properties" element={<Properties />} />
+          <Route path="/properties/:id" element={<PropertyDetails />} />
+          <Route path="/tenants" element={<Tenants />} />
+          <Route path="/tenants/:id" element={<TenantDetails />} />
+          <Route path="/maintenance" element={<Maintenance />} />
+          <Route path="/financials" element={<Financials />} />
+          <Route path="/alerts" element={<Alerts />} />
+          <Route path="/reports" element={<Reports />} />
+        </Routes>
       </Box>
-    </ThemeProvider>
+    </Box>
   );
 };
 

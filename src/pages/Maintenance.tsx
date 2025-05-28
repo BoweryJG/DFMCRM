@@ -177,52 +177,65 @@ const Maintenance: React.FC = () => {
   };
 
   return (
-    <Box sx={{ backgroundColor: '#f5f5f5', minHeight: '100vh', p: 3 }}>
+    <Box sx={{ backgroundColor: '#f5f5f5', minHeight: '100vh', p: { xs: 2, sm: 3 } }}>
       {/* Header */}
       <Box sx={{ mb: 4 }}>
-        <Typography variant="h3" sx={{ fontWeight: 'bold', color: '#1e3a5f', mb: 1 }}>
+        <Typography variant="h3" sx={{ 
+          fontWeight: 'bold', 
+          color: '#1e3a5f', 
+          mb: 1,
+          fontSize: { xs: '1.5rem', sm: '2rem', md: '3rem' }
+        }}>
           Maintenance Management
         </Typography>
-        <Typography variant="h6" sx={{ color: '#666' }}>
+        <Typography variant="h6" sx={{ 
+          color: '#666',
+          fontSize: { xs: '0.875rem', sm: '1rem', md: '1.25rem' }
+        }}>
           Track and manage all property maintenance requests
         </Typography>
       </Box>
 
       {/* Quick Stats */}
-      <Grid container spacing={3} sx={{ mb: 4 }}>
+      <Grid container spacing={{ xs: 2, sm: 3 }} sx={{ mb: 4 }}>
         <Grid item xs={12} sm={6} md={3}>
-          <Card sx={{ p: 3, textAlign: 'center' }}>
-            <BuildIcon sx={{ fontSize: 40, color: '#1e3a5f', mb: 1 }} />
-            <Typography variant="h4" sx={{ fontWeight: 'bold' }}>{stats.total}</Typography>
-            <Typography variant="body2" color="text.secondary">Total Requests</Typography>
+          <Card sx={{ p: { xs: 2, sm: 3 }, textAlign: 'center' }}>
+            <BuildIcon sx={{ fontSize: { xs: 30, sm: 40 }, color: '#1e3a5f', mb: 1 }} />
+            <Typography variant="h4" sx={{ fontWeight: 'bold', fontSize: { xs: '1.5rem', sm: '2.125rem' } }}>{stats.total}</Typography>
+            <Typography variant="body2" color="text.secondary" sx={{ fontSize: { xs: '0.75rem', sm: '0.875rem' } }}>Total Requests</Typography>
           </Card>
         </Grid>
         <Grid item xs={12} sm={6} md={3}>
-          <Card sx={{ p: 3, textAlign: 'center', backgroundColor: '#fff3e0' }}>
-            <PriorityHighIcon sx={{ fontSize: 40, color: '#ff9800', mb: 1 }} />
-            <Typography variant="h4" sx={{ fontWeight: 'bold', color: '#ff9800' }}>{stats.urgent}</Typography>
-            <Typography variant="body2" color="text.secondary">Urgent Items</Typography>
+          <Card sx={{ p: { xs: 2, sm: 3 }, textAlign: 'center', backgroundColor: '#fff3e0' }}>
+            <PriorityHighIcon sx={{ fontSize: { xs: 30, sm: 40 }, color: '#ff9800', mb: 1 }} />
+            <Typography variant="h4" sx={{ fontWeight: 'bold', color: '#ff9800', fontSize: { xs: '1.5rem', sm: '2.125rem' } }}>{stats.urgent}</Typography>
+            <Typography variant="body2" color="text.secondary" sx={{ fontSize: { xs: '0.75rem', sm: '0.875rem' } }}>Urgent Items</Typography>
           </Card>
         </Grid>
         <Grid item xs={12} sm={6} md={3}>
-          <Card sx={{ p: 3, textAlign: 'center' }}>
-            <ScheduleIcon sx={{ fontSize: 40, color: '#2196f3', mb: 1 }} />
-            <Typography variant="h4" sx={{ fontWeight: 'bold' }}>{stats.pending}</Typography>
-            <Typography variant="body2" color="text.secondary">Pending Assignment</Typography>
+          <Card sx={{ p: { xs: 2, sm: 3 }, textAlign: 'center' }}>
+            <ScheduleIcon sx={{ fontSize: { xs: 30, sm: 40 }, color: '#2196f3', mb: 1 }} />
+            <Typography variant="h4" sx={{ fontWeight: 'bold', fontSize: { xs: '1.5rem', sm: '2.125rem' } }}>{stats.pending}</Typography>
+            <Typography variant="body2" color="text.secondary" sx={{ fontSize: { xs: '0.75rem', sm: '0.875rem' } }}>Pending Assignment</Typography>
           </Card>
         </Grid>
         <Grid item xs={12} sm={6} md={3}>
-          <Card sx={{ p: 3, textAlign: 'center' }}>
-            <AttachMoneyIcon sx={{ fontSize: 40, color: '#4caf50', mb: 1 }} />
-            <Typography variant="h4" sx={{ fontWeight: 'bold' }}>${stats.totalCost}</Typography>
-            <Typography variant="body2" color="text.secondary">Estimated Costs</Typography>
+          <Card sx={{ p: { xs: 2, sm: 3 }, textAlign: 'center' }}>
+            <AttachMoneyIcon sx={{ fontSize: { xs: 30, sm: 40 }, color: '#4caf50', mb: 1 }} />
+            <Typography variant="h4" sx={{ fontWeight: 'bold', fontSize: { xs: '1.5rem', sm: '2.125rem' } }}>${stats.totalCost}</Typography>
+            <Typography variant="body2" color="text.secondary" sx={{ fontSize: { xs: '0.75rem', sm: '0.875rem' } }}>Estimated Costs</Typography>
           </Card>
         </Grid>
       </Grid>
 
       {/* Filters and Actions */}
-      <Box sx={{ display: 'flex', gap: 2, mb: 3, flexWrap: 'wrap' }}>
-        <FormControl sx={{ minWidth: 200 }}>
+      <Box sx={{ 
+        display: 'flex', 
+        flexDirection: { xs: 'column', sm: 'row' },
+        gap: 2, 
+        mb: 3
+      }}>
+        <FormControl sx={{ minWidth: { xs: '100%', sm: 200 } }}>
           <InputLabel>Status Filter</InputLabel>
           <Select
             value={filterStatus}
@@ -236,7 +249,7 @@ const Maintenance: React.FC = () => {
             <MenuItem value="completed">Completed</MenuItem>
           </Select>
         </FormControl>
-        <FormControl sx={{ minWidth: 200 }}>
+        <FormControl sx={{ minWidth: { xs: '100%', sm: 200 } }}>
           <InputLabel>Priority Filter</InputLabel>
           <Select
             value={filterPriority}
@@ -266,11 +279,11 @@ const Maintenance: React.FC = () => {
       </Box>
 
       {/* Main Content */}
-      <Grid container spacing={3}>
+      <Grid container spacing={{ xs: 2, sm: 3 }}>
         {/* Maintenance Requests List */}
         <Grid item xs={12} md={8}>
-          <Card sx={{ boxShadow: '0 4px 20px rgba(0,0,0,0.08)' }}>
-            <Box sx={{ p: 2, borderBottom: '1px solid #eee' }}>
+          <Card sx={{ boxShadow: '0 4px 20px rgba(0,0,0,0.08)', overflow: { xs: 'auto', sm: 'visible' } }}>
+            <Box sx={{ p: { xs: 1.5, sm: 2 }, borderBottom: '1px solid #eee' }}>
               <Typography variant="h6" sx={{ fontWeight: 'bold' }}>
                 Active Maintenance Requests
               </Typography>
@@ -280,8 +293,10 @@ const Maintenance: React.FC = () => {
                 <React.Fragment key={request.id}>
                   <ListItem
                     sx={{
-                      px: 3,
+                      px: { xs: 2, sm: 3 },
                       py: 2,
+                      flexDirection: { xs: 'column', sm: 'row' },
+                      alignItems: { xs: 'flex-start', sm: 'center' },
                       '&:hover': {
                         backgroundColor: '#f5f5f5'
                       }
@@ -294,8 +309,11 @@ const Maintenance: React.FC = () => {
                     </ListItemAvatar>
                     <ListItemText
                       primary={
-                        <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
-                          <Typography variant="subtitle1" sx={{ fontWeight: 'bold' }}>
+                        <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, flexWrap: 'wrap' }}>
+                          <Typography variant="subtitle1" sx={{ 
+                            fontWeight: 'bold',
+                            fontSize: { xs: '0.9rem', sm: '1rem' }
+                          }}>
                             {request.property} - Unit {request.unit}
                           </Typography>
                           <Chip 
@@ -330,7 +348,12 @@ const Maintenance: React.FC = () => {
                         </Box>
                       }
                     />
-                    <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+                    <Box sx={{ 
+                      display: 'flex', 
+                      alignItems: 'center', 
+                      gap: 1,
+                      mt: { xs: 1, sm: 0 }
+                    }}>
                       <Typography variant="h6" sx={{ color: '#1e3a5f' }}>
                         ${request.estimatedCost}
                       </Typography>
@@ -349,7 +372,7 @@ const Maintenance: React.FC = () => {
         {/* Vendor List */}
         <Grid item xs={12} md={4}>
           <Card sx={{ boxShadow: '0 4px 20px rgba(0,0,0,0.08)', mb: 3 }}>
-            <Box sx={{ p: 2, borderBottom: '1px solid #eee' }}>
+            <Box sx={{ p: { xs: 1.5, sm: 2 }, borderBottom: '1px solid #eee' }}>
               <Typography variant="h6" sx={{ fontWeight: 'bold' }}>
                 Preferred Vendors
               </Typography>
@@ -357,7 +380,7 @@ const Maintenance: React.FC = () => {
             <List sx={{ p: 0 }}>
               {vendors.map((vendor, index) => (
                 <React.Fragment key={vendor.name}>
-                  <ListItem sx={{ px: 3, py: 2 }}>
+                  <ListItem sx={{ px: { xs: 2, sm: 3 }, py: 2 }}>
                     <ListItemAvatar>
                       <Avatar sx={{ backgroundColor: '#1e3a5f' }}>
                         {getCategoryIcon(vendor.specialty)}
@@ -385,7 +408,7 @@ const Maintenance: React.FC = () => {
           </Card>
 
           {/* Quick Status Overview */}
-          <Card sx={{ p: 3, boxShadow: '0 4px 20px rgba(0,0,0,0.08)' }}>
+          <Card sx={{ p: { xs: 2, sm: 3 }, boxShadow: '0 4px 20px rgba(0,0,0,0.08)' }}>
             <Typography variant="h6" sx={{ fontWeight: 'bold', mb: 2 }}>
               Status Overview
             </Typography>
@@ -454,7 +477,7 @@ const Maintenance: React.FC = () => {
       <Dialog open={openNewRequest} onClose={() => setOpenNewRequest(false)} maxWidth="md" fullWidth>
         <DialogTitle>Create New Maintenance Request</DialogTitle>
         <DialogContent>
-          <Grid container spacing={2} sx={{ mt: 1 }}>
+          <Grid container spacing={{ xs: 2, sm: 2 }} sx={{ mt: 1 }}>
             <Grid item xs={12} sm={6}>
               <FormControl fullWidth>
                 <InputLabel>Property</InputLabel>

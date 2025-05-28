@@ -247,13 +247,28 @@ const Properties: React.FC = () => {
   };
 
   return (
-    <Box sx={{ backgroundColor: '#f5f5f5', minHeight: '100vh', p: 3 }}>
-      <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: 4 }}>
+    <Box sx={{ backgroundColor: '#f5f5f5', minHeight: '100vh', p: { xs: 2, sm: 3 } }}>
+      <Box sx={{ 
+        display: 'flex', 
+        flexDirection: { xs: 'column', sm: 'row' },
+        justifyContent: 'space-between', 
+        alignItems: { xs: 'flex-start', sm: 'center' }, 
+        mb: 4,
+        gap: 2
+      }}>
         <Box>
-          <Typography variant="h3" sx={{ fontWeight: 'bold', color: '#1e3a5f' }}>
+          <Typography variant="h3" sx={{ 
+            fontWeight: 'bold', 
+            color: '#1e3a5f',
+            fontSize: { xs: '1.5rem', sm: '2rem', md: '3rem' }
+          }}>
             Property Portfolio
           </Typography>
-          <Typography variant="h6" sx={{ color: '#666', mt: 1 }}>
+          <Typography variant="h6" sx={{ 
+            color: '#666', 
+            mt: 1,
+            fontSize: { xs: '0.875rem', sm: '1rem', md: '1.25rem' }
+          }}>
             {propertiesData.length} Properties • {propertiesData.reduce((sum, p) => sum + p.units, 0)} Total Units • ${(propertiesData.reduce((sum, p) => sum + p.monthlyRevenue, 0) / 1000).toFixed(0)}K Monthly Revenue
           </Typography>
         </Box>
@@ -261,13 +276,21 @@ const Properties: React.FC = () => {
           variant="contained"
           color="primary"
           startIcon={<AddIcon />}
-          // onClick={handleAddDialogOpen} // Add dialog functionality later
+          sx={{ 
+            whiteSpace: 'nowrap',
+            minWidth: { xs: '100%', sm: 'auto' }
+          }}
         >
           Add Property
         </Button>
       </Box>
 
-      <Box sx={{ display: 'flex', mb: 3, gap: 2 }}>
+      <Box sx={{ 
+        display: 'flex', 
+        flexDirection: { xs: 'column', sm: 'row' },
+        mb: 3, 
+        gap: 2 
+      }}>
         <TextField
           fullWidth
           placeholder="Search by address, city, or type"
@@ -282,7 +305,7 @@ const Properties: React.FC = () => {
             ),
           }}
         />
-        <FormControl sx={{ minWidth: 200 }}>
+        <FormControl sx={{ minWidth: { xs: '100%', sm: 200 } }}>
           <InputLabel id="property-type-filter-label">Property Type</InputLabel>
           <Select
             labelId="property-type-filter-label"
@@ -299,7 +322,7 @@ const Properties: React.FC = () => {
         </FormControl>
       </Box>
 
-      <Grid container spacing={3}>
+      <Grid container spacing={{ xs: 2, sm: 3 }}>
         {filteredProperties.map((property) => (
           <Grid item xs={12} sm={6} md={4} key={property.id}> {/* Changed size prop to item and direct props */}
             <Card
@@ -362,7 +385,7 @@ const Properties: React.FC = () => {
                   />
                 )}
               </Box>
-              <CardContent sx={{ flexGrow: 1 }}>
+              <CardContent sx={{ flexGrow: 1, p: { xs: 2, sm: 3 } }}>
                 <Typography gutterBottom variant="h6" component="div" sx={{ fontWeight: 'bold' }}>
                   {property.address}
                 </Typography>
@@ -435,7 +458,7 @@ const Properties: React.FC = () => {
                   </Typography>
                 )}
               </CardContent>
-              <Box sx={{ p: 2, borderTop: '1px solid #eee', backgroundColor: '#fafafa' }}>
+              <Box sx={{ p: { xs: 1.5, sm: 2 }, borderTop: '1px solid #eee', backgroundColor: '#fafafa' }}>
                 <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: 1 }}>
                   <Box>
                     <Typography variant="h6" sx={{ color: '#1e3a5f', fontWeight: 'bold' }}>

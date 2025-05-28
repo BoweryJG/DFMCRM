@@ -88,30 +88,49 @@ const Dashboard: React.FC = () => {
   const [selectedProperty, setSelectedProperty] = useState<string | null>(null);
 
   return (
-    <Box sx={{ backgroundColor: '#f5f5f5', minHeight: '100vh', p: 3 }}>
+    <Box sx={{ backgroundColor: '#f5f5f5', minHeight: '100vh', p: { xs: 2, sm: 3 } }}>
       {/* Header with branding */}
-      <Box sx={{ mb: 4, display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+      <Box sx={{ 
+        mb: 4, 
+        display: 'flex', 
+        flexDirection: { xs: 'column', md: 'row' },
+        alignItems: { xs: 'flex-start', md: 'center' }, 
+        justifyContent: 'space-between',
+        gap: 2
+      }}>
         <Box>
-          <Typography variant="h3" sx={{ fontWeight: 'bold', color: '#1e3a5f', mb: 1 }}>
+          <Typography variant="h3" sx={{ 
+            fontWeight: 'bold', 
+            color: '#1e3a5f', 
+            mb: 1,
+            fontSize: { xs: '1.5rem', sm: '2rem', md: '3rem' }
+          }}>
             DFM Properties
           </Typography>
-          <Typography variant="h6" sx={{ color: '#666' }}>
+          <Typography variant="h6" sx={{ 
+            color: '#666',
+            fontSize: { xs: '0.875rem', sm: '1rem', md: '1.25rem' }
+          }}>
             Scranton's Premier Student Housing • {new Date().toLocaleDateString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })}
           </Typography>
         </Box>
-        <Box sx={{ display: 'flex', gap: 2 }}>
+        <Box sx={{ 
+          display: { xs: 'none', sm: 'flex' }, 
+          gap: 2,
+          flexWrap: 'wrap'
+        }}>
           <Chip icon={<SchoolIcon />} label="University District" color="primary" />
           <Chip icon={<LocationOnIcon />} label="Downtown Scranton" color="secondary" />
         </Box>
       </Box>
 
       {/* Key Metrics - Visual and ADD-friendly */}
-      <Grid container spacing={3} sx={{ mb: 4 }}>
+      <Grid container spacing={{ xs: 2, sm: 3 }} sx={{ mb: 4 }}>
         {summaryData.map((item, index) => (
           <Grid item xs={12} sm={6} md={3} key={index}>
             <Card 
               sx={{ 
-                p: 3, 
+                p: { xs: 2, sm: 3 }, 
                 height: '100%',
                 backgroundColor: 'white',
                 boxShadow: '0 4px 20px rgba(0,0,0,0.08)',
@@ -129,13 +148,25 @@ const Dashboard: React.FC = () => {
             >
               <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
                 <Box>
-                  <Typography variant="h3" sx={{ fontWeight: 'bold', color: item.color, mb: 1 }}>
+                  <Typography variant="h3" sx={{ 
+                    fontWeight: 'bold', 
+                    color: item.color, 
+                    mb: 1,
+                    fontSize: { xs: '1.75rem', sm: '2.5rem', md: '3rem' }
+                  }}>
                     {item.value}
                   </Typography>
-                  <Typography variant="h6" sx={{ color: '#666', mb: 0.5 }}>
+                  <Typography variant="h6" sx={{ 
+                    color: '#666', 
+                    mb: 0.5,
+                    fontSize: { xs: '1rem', sm: '1.25rem' }
+                  }}>
                     {item.title}
                   </Typography>
-                  <Typography variant="body2" sx={{ color: '#999' }}>
+                  <Typography variant="body2" sx={{ 
+                    color: '#999',
+                    fontSize: { xs: '0.75rem', sm: '0.875rem' }
+                  }}>
                     {item.subtitle}
                   </Typography>
                   <Chip 
@@ -159,10 +190,15 @@ const Dashboard: React.FC = () => {
       </Grid>
 
       {/* Quick Actions Panel - ADD-friendly */}
-      <Grid container spacing={3} sx={{ mb: 4 }}>
+      <Grid container spacing={{ xs: 2, sm: 3 }} sx={{ mb: 4 }}>
         <Grid item xs={12} md={4}>
-          <Card sx={{ p: 3, height: '100%', boxShadow: '0 4px 20px rgba(0,0,0,0.08)' }}>
-            <Typography variant="h5" sx={{ fontWeight: 'bold', mb: 2, color: '#1e3a5f' }}>
+          <Card sx={{ p: { xs: 2, sm: 3 }, height: '100%', boxShadow: '0 4px 20px rgba(0,0,0,0.08)' }}>
+            <Typography variant="h5" sx={{ 
+              fontWeight: 'bold', 
+              mb: 2, 
+              color: '#1e3a5f',
+              fontSize: { xs: '1.125rem', sm: '1.5rem' }
+            }}>
               🎯 Quick Actions
             </Typography>
             {quickActions.map((action) => (
@@ -200,8 +236,13 @@ const Dashboard: React.FC = () => {
 
         {/* Property Performance Visual */}
         <Grid item xs={12} md={8}>
-          <Card sx={{ p: 3, height: '100%', boxShadow: '0 4px 20px rgba(0,0,0,0.08)' }}>
-            <Typography variant="h5" sx={{ fontWeight: 'bold', mb: 2, color: '#1e3a5f' }}>
+          <Card sx={{ p: { xs: 2, sm: 3 }, height: '100%', boxShadow: '0 4px 20px rgba(0,0,0,0.08)' }}>
+            <Typography variant="h5" sx={{ 
+              fontWeight: 'bold', 
+              mb: 2, 
+              color: '#1e3a5f',
+              fontSize: { xs: '1.125rem', sm: '1.5rem' }
+            }}>
               📊 Property Performance
             </Typography>
             <Grid container spacing={2}>
@@ -261,10 +302,15 @@ const Dashboard: React.FC = () => {
       </Grid>
 
       {/* Revenue and Tenant Mix */}
-      <Grid container spacing={3}>
+      <Grid container spacing={{ xs: 2, sm: 3 }}>
         <Grid item xs={12} md={8}>
-          <Card sx={{ p: 3, boxShadow: '0 4px 20px rgba(0,0,0,0.08)' }}>
-            <Typography variant="h5" sx={{ fontWeight: 'bold', mb: 2, color: '#1e3a5f' }}>
+          <Card sx={{ p: { xs: 2, sm: 3 }, boxShadow: '0 4px 20px rgba(0,0,0,0.08)' }}>
+            <Typography variant="h5" sx={{ 
+              fontWeight: 'bold', 
+              mb: 2, 
+              color: '#1e3a5f',
+              fontSize: { xs: '1.125rem', sm: '1.5rem' }
+            }}>
               💰 Revenue Trend
             </Typography>
             <ResponsiveContainer width="100%" height={300}>
@@ -280,8 +326,13 @@ const Dashboard: React.FC = () => {
           </Card>
         </Grid>
         <Grid item xs={12} md={4}>
-          <Card sx={{ p: 3, boxShadow: '0 4px 20px rgba(0,0,0,0.08)' }}>
-            <Typography variant="h5" sx={{ fontWeight: 'bold', mb: 2, color: '#1e3a5f' }}>
+          <Card sx={{ p: { xs: 2, sm: 3 }, boxShadow: '0 4px 20px rgba(0,0,0,0.08)' }}>
+            <Typography variant="h5" sx={{ 
+              fontWeight: 'bold', 
+              mb: 2, 
+              color: '#1e3a5f',
+              fontSize: { xs: '1.125rem', sm: '1.5rem' }
+            }}>
               👥 Tenant Mix
             </Typography>
             <ResponsiveContainer width="100%" height={300}>

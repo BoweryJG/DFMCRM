@@ -198,9 +198,19 @@ const Tenants: React.FC = () => {
   const properties = [...new Set(tenantsData.map(tenant => tenant.property))];
 
   return (
-    <Box>
-      <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: 3 }}>
-        <Typography variant="h4" sx={{ fontWeight: 'bold' }}>
+    <Box sx={{ p: { xs: 2, sm: 3 } }}>
+      <Box sx={{ 
+        display: 'flex', 
+        flexDirection: { xs: 'column', sm: 'row' },
+        justifyContent: 'space-between', 
+        alignItems: { xs: 'flex-start', sm: 'center' }, 
+        mb: 3,
+        gap: 2
+      }}>
+        <Typography variant="h4" sx={{ 
+          fontWeight: 'bold',
+          fontSize: { xs: '1.5rem', sm: '2rem', md: '2.125rem' }
+        }}>
           Tenants
         </Typography>
         <Button
@@ -208,12 +218,20 @@ const Tenants: React.FC = () => {
           color="primary"
           startIcon={<AddIcon />}
           onClick={handleAddDialogOpen}
+          sx={{ 
+            minWidth: { xs: '100%', sm: 'auto' }
+          }}
         >
           Add Tenant
         </Button>
       </Box>
 
-      <Box sx={{ display: 'flex', mb: 3, gap: 2 }}>
+      <Box sx={{ 
+        display: 'flex', 
+        flexDirection: { xs: 'column', sm: 'row' },
+        mb: 3, 
+        gap: 2 
+      }}>
         <TextField
           fullWidth
           placeholder="Search by name, unit, or property"
@@ -228,7 +246,7 @@ const Tenants: React.FC = () => {
             ),
           }}
         />
-        <FormControl sx={{ minWidth: 150 }}>
+        <FormControl sx={{ minWidth: { xs: '100%', sm: 150 } }}>
           <InputLabel id="tenant-status-filter-label">Status</InputLabel>
           <Select
             labelId="tenant-status-filter-label"
@@ -243,7 +261,7 @@ const Tenants: React.FC = () => {
             <MenuItem value="Notice">Given Notice</MenuItem>
           </Select>
         </FormControl>
-        <FormControl sx={{ minWidth: 200 }}>
+        <FormControl sx={{ minWidth: { xs: '100%', sm: 200 } }}>
           <InputLabel id="tenant-property-filter-label">Property</InputLabel>
           <Select
             labelId="tenant-property-filter-label"
@@ -260,8 +278,13 @@ const Tenants: React.FC = () => {
         </FormControl>
       </Box>
 
-      <Card>
-        <List>
+      <Card sx={{ overflow: { xs: 'auto', sm: 'visible' } }}>
+        <List sx={{ 
+          minWidth: { xs: '100%', sm: 'auto' },
+          '& .MuiListItem-root': {
+            flexWrap: { xs: 'wrap', sm: 'nowrap' }
+          }
+        }}>
           {filteredTenants.map((tenant) => (
             <React.Fragment key={tenant.id}>
               <ListItem 
@@ -279,23 +302,36 @@ const Tenants: React.FC = () => {
                   </Avatar>
                 </ListItemAvatar>
                 <ListItemText
-                  primary={tenant.name}
+                  primary={<Typography sx={{ fontSize: { xs: '0.9rem', sm: '1rem' } }}>{tenant.name}</Typography>}
                   secondary={
                     <React.Fragment>
                       <Typography
                         component="span"
                         variant="body2"
                         color="text.primary"
+                        sx={{ fontSize: { xs: '0.75rem', sm: '0.875rem' } }}
                       >
                         {tenant.property} • Unit {tenant.unit}
                       </Typography>
                       {tenant.commercial ? ' — Commercial Tenant' : ''}
                       <br />
-                      Lease: {tenant.leaseStart} to {tenant.leaseEnd} • Rent: ${tenant.rent}/month
+                      <Typography
+                        component="span"
+                        variant="body2"
+                        sx={{ fontSize: { xs: '0.75rem', sm: '0.875rem' } }}
+                      >
+                        Lease: {tenant.leaseStart} to {tenant.leaseEnd} • Rent: ${tenant.rent}/month
+                      </Typography>
                     </React.Fragment>
                   }
                 />
-                <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-end' }}>
+                <Box sx={{ 
+                  display: 'flex', 
+                  flexDirection: 'column', 
+                  alignItems: 'flex-end',
+                  width: { xs: '100%', sm: 'auto' },
+                  mt: { xs: 1, sm: 0 }
+                }}>
                   <Chip 
                     label={new Date(tenant.leaseEnd) < new Date(Date.now() + 30 * 24 * 60 * 60 * 1000) ? "Lease Ending Soon" : "Active Lease"} 
                     color={new Date(tenant.leaseEnd) < new Date(Date.now() + 30 * 24 * 60 * 60 * 1000) ? "warning" : "success"} 
@@ -325,7 +361,7 @@ const Tenants: React.FC = () => {
       <Dialog open={openAddDialog} onClose={handleAddDialogClose} maxWidth="md" fullWidth>
         <DialogTitle>Add New Tenant</DialogTitle>
         <DialogContent>
-          <Grid container spacing={2} sx={{ mt: 1 }}>
+          <Grid container spacing={{ xs: 2, sm: 2 }} sx={{ mt: 1 }}>
             <Grid item xs={12} sm={6}> {/* Changed size prop to item and direct props */}
               <TextField label="Full Name" fullWidth />
             </Grid>
