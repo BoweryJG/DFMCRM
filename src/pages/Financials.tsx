@@ -1,9 +1,8 @@
-import React, { useState } from 'react';
+import React from 'react';
 import {
   Box,
   Typography,
   Card,
-  Grid,
   Chip,
   Button,
   LinearProgress,
@@ -13,13 +12,12 @@ import {
   TableContainer,
   TableHead,
   TableRow,
-  Paper,
   IconButton,
   Tooltip,
 } from '@mui/material';
+import Grid from '@mui/material/GridLegacy';
 import AttachMoneyIcon from '@mui/icons-material/AttachMoney';
 import TrendingUpIcon from '@mui/icons-material/TrendingUp';
-import TrendingDownIcon from '@mui/icons-material/TrendingDown';
 import AccountBalanceIcon from '@mui/icons-material/AccountBalance';
 import ReceiptIcon from '@mui/icons-material/Receipt';
 import DownloadIcon from '@mui/icons-material/Download';
@@ -79,8 +77,6 @@ const propertyPerformance = [
 ];
 
 const Financials: React.FC = () => {
-  const [selectedPeriod, setSelectedPeriod] = useState('month');
-
   const formatCurrency = (amount: number) => {
     return new Intl.NumberFormat('en-US', {
       style: 'currency',

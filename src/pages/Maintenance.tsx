@@ -3,7 +3,6 @@ import {
   Box,
   Typography,
   Card,
-  Grid,
   Chip,
   Button,
   LinearProgress,
@@ -25,9 +24,8 @@ import {
   DialogContent,
   DialogActions,
 } from '@mui/material';
+import Grid from '@mui/material/GridLegacy';
 import BuildIcon from '@mui/icons-material/Build';
-import WarningIcon from '@mui/icons-material/Warning';
-import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import ScheduleIcon from '@mui/icons-material/Schedule';
 import PriorityHighIcon from '@mui/icons-material/PriorityHigh';
 import HandymanIcon from '@mui/icons-material/Handyman';
@@ -37,7 +35,6 @@ import AcUnitIcon from '@mui/icons-material/AcUnit';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 import AddIcon from '@mui/icons-material/Add';
 import AttachMoneyIcon from '@mui/icons-material/AttachMoney';
-import { useNavigate } from 'react-router-dom';
 
 // Maintenance request data
 const maintenanceRequests = [
@@ -122,21 +119,17 @@ const vendors = [
 ];
 
 const Maintenance: React.FC = () => {
-  const navigate = useNavigate();
-  const [selectedRequest, setSelectedRequest] = useState<number | null>(null);
   const [filterStatus, setFilterStatus] = useState('all');
   const [filterPriority, setFilterPriority] = useState('all');
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const [openNewRequest, setOpenNewRequest] = useState(false);
 
-  const handleMenuOpen = (event: React.MouseEvent<HTMLElement>, requestId: number) => {
+  const handleMenuOpen = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorEl(event.currentTarget);
-    setSelectedRequest(requestId);
   };
 
   const handleMenuClose = () => {
     setAnchorEl(null);
-    setSelectedRequest(null);
   };
 
   const getStatusColor = (status: string) => {
@@ -341,7 +334,7 @@ const Maintenance: React.FC = () => {
                       <Typography variant="h6" sx={{ color: '#1e3a5f' }}>
                         ${request.estimatedCost}
                       </Typography>
-                      <IconButton onClick={(e) => handleMenuOpen(e, request.id)}>
+                      <IconButton onClick={(e) => handleMenuOpen(e)}>
                         <MoreVertIcon />
                       </IconButton>
                     </Box>

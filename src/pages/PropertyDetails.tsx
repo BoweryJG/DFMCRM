@@ -1,9 +1,8 @@
 import React, { useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import {
   Box,
   Typography,
-  Grid,
   Paper,
   Tabs,
   Tab,
@@ -18,13 +17,12 @@ import {
   Card,
   CardContent,
   CardHeader,
-  IconButton,
 } from '@mui/material';
+import Grid from '@mui/material/GridLegacy';
 import EditIcon from '@mui/icons-material/Edit';
 import PersonIcon from '@mui/icons-material/Person';
 import BuildIcon from '@mui/icons-material/Build';
 import AttachMoneyIcon from '@mui/icons-material/AttachMoney';
-import EventIcon from '@mui/icons-material/Event';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, BarChart, Bar } from 'recharts';
 
 // Mock data for property details
@@ -241,6 +239,7 @@ function TabPanel(props: TabPanelProps) {
 
 const PropertyDetails: React.FC = () => {
   const { id } = useParams<{ id: string }>();
+  const navigate = useNavigate();
   const [tabValue, setTabValue] = useState(0);
   const property = propertyData[Number(id) as keyof typeof propertyData];
 
@@ -252,7 +251,7 @@ const PropertyDetails: React.FC = () => {
     );
   }
 
-  const handleTabChange = (event: React.SyntheticEvent, newValue: number) => {
+  const handleTabChange = (_event: React.SyntheticEvent, newValue: number) => {
     setTabValue(newValue);
   };
 
@@ -390,9 +389,10 @@ const PropertyDetails: React.FC = () => {
               {property.tenants.map((tenant) => (
                 <React.Fragment key={tenant.id}>
                   <ListItem 
-                    button 
+                    component="li"
                     alignItems="flex-start"
                     onClick={() => navigate(`/tenants/${tenant.id}`)}
+                    sx={{ cursor: 'pointer' }}
                   >
                     <ListItemAvatar>
                       <Avatar>
@@ -410,7 +410,7 @@ const PropertyDetails: React.FC = () => {
                           >
                             Unit {tenant.unit}
                           </Typography>
-                          {tenant.commercial ? ' — Commercial Tenant' : ''}
+                          {'commercial' in tenant && tenant.commercial ? ' — Commercial Tenant' : ''}
                           <br />
                           Lease ends: {tenant.leaseEnd} • Rent: ${tenant.rent}/month
                         </React.Fragment>
@@ -435,9 +435,10 @@ const PropertyDetails: React.FC = () => {
               {property.maintenanceRequests.map((request) => (
                 <React.Fragment key={request.id}>
                   <ListItem 
-                    button 
+                    component="li"
                     alignItems="flex-start"
                     onClick={() => navigate(`/maintenance/${request.id}`)}
+                    sx={{ cursor: 'pointer' }}
                   >
                     <ListItemAvatar>
                       <Avatar>

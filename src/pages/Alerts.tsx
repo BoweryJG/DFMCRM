@@ -3,7 +3,6 @@ import {
   Box,
   Typography,
   Card,
-  Grid,
   Chip,
   Button,
   List,
@@ -15,10 +14,10 @@ import {
   Badge,
   Divider,
   Switch,
-  FormControlLabel,
   Tabs,
   Tab,
 } from '@mui/material';
+import Grid from '@mui/material/GridLegacy';
 import NotificationsIcon from '@mui/icons-material/Notifications';
 import WarningIcon from '@mui/icons-material/Warning';
 import InfoIcon from '@mui/icons-material/Info';
@@ -26,10 +25,8 @@ import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import CalendarTodayIcon from '@mui/icons-material/CalendarToday';
 import AttachMoneyIcon from '@mui/icons-material/AttachMoney';
 import BuildIcon from '@mui/icons-material/Build';
-import PeopleIcon from '@mui/icons-material/People';
 import DoneAllIcon from '@mui/icons-material/DoneAll';
 import DeleteIcon from '@mui/icons-material/Delete';
-import { useNavigate } from 'react-router-dom';
 
 // Alert types
 type AlertType = 'urgent' | 'warning' | 'info' | 'success';
@@ -135,11 +132,10 @@ const notificationSettings = [
 ];
 
 const Alerts: React.FC = () => {
-  const navigate = useNavigate();
   const [selectedTab, setSelectedTab] = useState(0);
   const [alerts, setAlerts] = useState(alertsData);
 
-  const handleTabChange = (event: React.SyntheticEvent, newValue: number) => {
+  const handleTabChange = (_event: React.SyntheticEvent, newValue: number) => {
     setSelectedTab(newValue);
   };
 

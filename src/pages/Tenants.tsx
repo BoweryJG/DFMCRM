@@ -21,9 +21,8 @@ import {
   InputLabel,
   Select,
   MenuItem,
-  Grid, // Added Grid here
 } from '@mui/material';
-// Removed import Grid from '@mui/material/Grid2';
+import Grid from '@mui/material/GridLegacy';
 import SearchIcon from '@mui/icons-material/Search';
 import AddIcon from '@mui/icons-material/Add';
 import PersonIcon from '@mui/icons-material/Person';
