@@ -1,6 +1,6 @@
 import React from 'react';
 import { Routes, Route, Navigate } from 'react-router-dom';
-import { Box, useTheme, useMediaQuery } from '@mui/material';
+import { Box, useTheme } from '@mui/material';
 
 // Layout components
 import { Navigation } from './components/Navigation';
@@ -18,7 +18,6 @@ import Reports from './pages/Reports';
 
 const App: React.FC = () => {
   const theme = useTheme();
-  const isMobile = useMediaQuery(theme.breakpoints.down('md'));
 
   return (
     <Box sx={{ display: 'flex', minHeight: '100vh' }}>

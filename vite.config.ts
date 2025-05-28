@@ -12,5 +12,16 @@ export default defineConfig({
   },
   server: {
     port: 3000,
+    headers: {
+      'Content-Type': 'application/javascript',
+    },
   },
+  build: {
+    target: 'es2015',
+    modulePreload: {
+      polyfill: true,
+    },
+    assetsInclude: ['**/*.js'],
+  },
+  base: './',
 });
