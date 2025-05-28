@@ -28,9 +28,11 @@ import {
   Brightness4 as DarkModeIcon,
   Brightness7 as LightModeIcon,
   Close as CloseIcon,
+  Logout as LogoutIcon,
 } from '@mui/icons-material';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { useTheme as useCustomTheme } from '../contexts/ThemeContext';
+import { useAuth } from '../contexts/AuthContext';
 
 const menuItems = [
   { text: 'Dashboard', icon: <HomeIcon />, path: '/' },
@@ -49,6 +51,7 @@ export const Navigation: React.FC = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const { darkMode, toggleDarkMode } = useCustomTheme();
+  const { signOut, user } = useAuth();
 
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
@@ -149,27 +152,75 @@ export const Navigation: React.FC = () => {
         ))}
       </List>
       <Divider sx={{ mx: 2 }} />
-      <ListItem sx={{ px: 3, py: 2 }}>
-        <ListItemIcon sx={{ minWidth: 40 }}>
-          {darkMode ? <DarkModeIcon /> : <LightModeIcon />}
-        </ListItemIcon>
-        <ListItemText 
-          primary="Dark Mode" 
-          primaryTypographyProps={{
-            fontSize: '0.875rem',
-            fontWeight: 500,
+      
+      {/* User info and settings */}
+      <Box sx={{ p: 2 }}>
+        {user && (
+          <Box sx={{ 
+            px: 2, 
+            py: 1.5, 
+            mb: 1,
+            backgroundColor: theme.palette.action.hover,
+            borderRadius: 2,
+          }}>
+            <Typography variant="body2" sx={{ fontWeight: 600, color: 'text.primary' }}>
+              {user.email}
+            </Typography>
+            <Typography variant="caption" sx={{ color: 'text.secondary' }}>
+              Property Manager
+            </Typography>
+          </Box>
+        )}
+        
+        <ListItem sx={{ px: 2, py: 1 }}>
+          <ListItemIcon sx={{ minWidth: 40 }}>
+            {darkMode ? <DarkModeIcon /> : <LightModeIcon />}
+          </ListItemIcon>
+          <ListItemText 
+            primary="Dark Mode" 
+            primaryTypographyProps={{
+              fontSize: '0.875rem',
+              fontWeight: 500,
+            }}
+          />
+          <Switch
+            edge="end"
+            onChange={toggleDarkMode}
+            checked={darkMode}
+            size="small"
+            inputProps={{
+              'aria-labelledby': 'switch-dark-mode',
+            }}
+          />
+        </ListItem>
+        
+        <ListItemButton
+          onClick={signOut}
+          sx={{
+            mt: 1,
+            borderRadius: 2,
+            color: 'error.main',
+            '&:hover': {
+              backgroundColor: 'error.main',
+              color: 'error.contrastText',
+              '& .MuiListItemIcon-root': {
+                color: 'error.contrastText',
+              },
+            },
           }}
-        />
-        <Switch
-          edge="end"
-          onChange={toggleDarkMode}
-          checked={darkMode}
-          size="small"
-          inputProps={{
-            'aria-labelledby': 'switch-dark-mode',
-          }}
-        />
-      </ListItem>
+        >
+          <ListItemIcon sx={{ minWidth: 40, color: 'error.main' }}>
+            <LogoutIcon />
+          </ListItemIcon>
+          <ListItemText 
+            primary="Sign Out" 
+            primaryTypographyProps={{
+              fontSize: '0.875rem',
+              fontWeight: 500,
+            }}
+          />
+        </ListItemButton>
+      </Box>
     </Box>
   );
 
