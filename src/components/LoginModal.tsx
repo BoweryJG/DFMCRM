@@ -8,7 +8,6 @@ import {
   Box,
   Typography,
   IconButton,
-  Divider,
   Alert,
   CircularProgress,
   useTheme,
@@ -16,13 +15,11 @@ import {
 } from '@mui/material';
 import {
   Close as CloseIcon,
-  Facebook as FacebookIcon,
   Email as EmailIcon,
   Lock as LockIcon,
   Visibility,
   VisibilityOff,
 } from '@mui/icons-material';
-import { GoogleIcon } from './icons/GoogleIcon';
 import { useAuth } from '../contexts/AuthContext';
 
 interface LoginModalProps {
@@ -32,7 +29,7 @@ interface LoginModalProps {
 
 export const LoginModal: React.FC<LoginModalProps> = ({ open, onClose }) => {
   const theme = useTheme();
-  const { signInWithGoogle, signInWithFacebook, signInWithEmail, signUp } = useAuth();
+  const { signInWithEmail, signUp } = useAuth();
   const [isSignUp, setIsSignUp] = useState(false);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -59,31 +56,6 @@ export const LoginModal: React.FC<LoginModalProps> = ({ open, onClose }) => {
     }
   };
 
-  const handleGoogleSignIn = async () => {
-    setLoading(true);
-    setError(null);
-    try {
-      await signInWithGoogle();
-      onClose();
-    } catch (err: any) {
-      setError(err.message || 'Failed to sign in with Google');
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  const handleFacebookSignIn = async () => {
-    setLoading(true);
-    setError(null);
-    try {
-      await signInWithFacebook();
-      onClose();
-    } catch (err: any) {
-      setError(err.message || 'Failed to sign in with Facebook');
-    } finally {
-      setLoading(false);
-    }
-  };
 
   const handleClose = () => {
     if (!loading) {
@@ -156,66 +128,9 @@ export const LoginModal: React.FC<LoginModalProps> = ({ open, onClose }) => {
           </Alert>
         )}
 
-        {/* OAuth Buttons */}
-        <Box sx={{ mt: 2, mb: 3 }}>
-          <Button
-            fullWidth
-            variant="outlined"
-            size="large"
-            onClick={handleGoogleSignIn}
-            disabled={loading}
-            startIcon={<GoogleIcon />}
-            sx={{
-              mb: 2,
-              py: 1.5,
-              borderRadius: 2,
-              borderColor: theme.palette.divider,
-              color: theme.palette.text.primary,
-              textTransform: 'none',
-              fontSize: '0.95rem',
-              fontWeight: 500,
-              '&:hover': {
-                borderColor: theme.palette.primary.main,
-                backgroundColor: theme.palette.action.hover,
-              },
-            }}
-          >
-            Continue with Google
-          </Button>
-
-          <Button
-            fullWidth
-            variant="outlined"
-            size="large"
-            onClick={handleFacebookSignIn}
-            disabled={loading}
-            startIcon={<FacebookIcon sx={{ color: '#1877F2' }} />}
-            sx={{
-              py: 1.5,
-              borderRadius: 2,
-              borderColor: theme.palette.divider,
-              color: theme.palette.text.primary,
-              textTransform: 'none',
-              fontSize: '0.95rem',
-              fontWeight: 500,
-              '&:hover': {
-                borderColor: '#1877F2',
-                backgroundColor: 'rgba(24, 119, 242, 0.04)',
-              },
-            }}
-          >
-            Continue with Facebook
-          </Button>
-        </Box>
-
-        <Divider sx={{ my: 3 }}>
-          <Typography variant="body2" color="text.secondary">
-            OR
-          </Typography>
-        </Divider>
 
         {/* Email Form */}
-        <Box component="form" onSubmit={handleEmailAuth}>
+        <Box component="form" onSubmit={handleEmailAuth} sx={{ mt: 3 }}>
           <TextField
             fullWidth
             label="Email"
